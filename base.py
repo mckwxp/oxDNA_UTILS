@@ -824,7 +824,7 @@ class Strand(Printable):
     def add_H_interaction(self,other_strand):
         if other_strand in self.H_interactions.keys():
             self.H_interactions[other_strand] += 1
-    else:
+        else:
             self.H_interactions[other_strand] = 1
 
     def get_H_interactions(self):
