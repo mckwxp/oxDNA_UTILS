@@ -1,0 +1,1395 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>origami_utils &#8212; oxDNA_UTILS  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="base" href="base.html" />
+    <link rel="prev" title="Welcome to oxDNA_UTILS’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="base.html" title="base"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to oxDNA_UTILS’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">oxDNA_UTILS  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-origami_utils">
+<span id="origami-utils"></span><h1>origami_utils<a class="headerlink" href="#module-origami_utils" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="origami_utils.Origami">
+<em class="property">class </em><code class="descclassname">origami_utils.</code><code class="descname">Origami</code><span class="sig-paren">(</span><em>system=False</em>, <em>cad2cuda_file=False</em>, <em>visibility=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami" title="Permalink to this definition">¶</a></dt>
+<dd><p>Origami object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>system</strong> – base.System object. Can be obtained from readers.LorenzoReader.get_system</li>
+<li><strong>cad2cuda_file</strong> – path to virt2nuc file. Can be obtained from cadnano_interface.py</li>
+<li><strong>visibility</strong> – path to visibility file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="origami_utils.Origami.base_to_vbase">
+<code class="descname">base_to_vbase</code><span class="sig-paren">(</span><em>vhelix</em>, <em>base</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.base_to_vbase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not used right now.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.check_branch_migration_strict">
+<code class="descname">check_branch_migration_strict</code><span class="sig-paren">(</span><em>vh1</em>, <em>vb1</em>, <em>vh2</em>, <em>vb2</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.check_branch_migration_strict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for branch migration using strict definition; returns true if there is branch migration, false otherwise.</p>
+<p>Strict definition: at least one of the 4 junction base pairs is missing.</p>
+<p>self.interaction_list must be filled using get_h_bond_list.</p>
+<p>The two virtual helices and two virtual bases that define the junction’s position are given as the four arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh1</strong> – first virtual helix index in cadnano</li>
+<li><strong>vb1</strong> – first virtual base index in cadnano</li>
+<li><strong>vh2</strong> – second virtual helix index in cadnano</li>
+<li><strong>vb2</strong> – second virtual base index in cadnano</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.compute_vh_midpoints">
+<code class="descname">compute_vh_midpoints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.compute_vh_midpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the base pair midpoints for each virtual helix just once to save time</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.corrug_angle">
+<code class="descname">corrug_angle</code><span class="sig-paren">(</span><em>xpos</em>, <em>bbms1</em>, <em>bbms2</em>, <em>id1</em>, <em>id2</em>, <em>av_axis</em>, <em>ref_intra_in_plane</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.corrug_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the corrugation angle as the dot product of the intra-strand
+vector at xpos with the reference vector, after both have been projected
+into the plane perpendicular to the average helix axis at the junction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.corrugation">
+<code class="descname">corrugation</code><span class="sig-paren">(</span><em>hj</em>, <em>span=16</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.corrugation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the corrugation a distance span around the junction hj. The
+corrugation pattern is quantified as the angle from the dot product between the average
+of the two intra-helix vectors at the junction and each of the other
+intra-helix vectors.</p>
+<p>Run compute_vh_midpoints() first.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>hj</strong> – should come from hjs[ii] where hjs=origami.get_holliday_junctions().</li>
+<li><strong>span</strong> – distance span around Holliday junction</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_1d_vecs">
+<code class="descname">get_1d_vecs</code><span class="sig-paren">(</span><em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_1d_vecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns orthonormal vectors based on the orientation of the strand.
+The returned vectors are “invariant” co-ordinates x’, y’, z’.
+x’: along double helix;
+yy: average backbone-base vector for the 0th strand;
+z’: x’ cross yy;
+y’: z’ cross x’</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation. NB: it is not currently implemented in this function.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_3d_twist">
+<code class="descname">get_3d_twist</code><span class="sig-paren">(</span><em>f_edge_vh</em>, <em>vhelix_extent=False</em>, <em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_3d_twist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the 3d global twist (top-bottom and left-right).</p>
+<p>Run get_h_bond_list first.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>f_edge_vh</strong> – path to vh_edge file (see the function parse_vh_edge)</li>
+<li><strong>vhelix_extent</strong> – 2-element array including the beginning and end of the virtual helix indices that you want to use</li>
+<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_3d_vecs">
+<code class="descname">get_3d_vecs</code><span class="sig-paren">(</span><em>vhelix_extent=False</em>, <em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_3d_vecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns orthonormal vectors based on the orientation of the origami.</p>
+<p>vhelix_extent currently unused…. uses extent of double helices (assuming there is one duplex per virtual helix).
+NB: the author of this documentation believes that it is actually used. Perhaps the author of the code did not update the comments after vhelix_extent was implemented.</p>
+<p>Assumes the skips are lined up across vhelices - in particular it will presumably break if there is a vb with a skip adjacent (in vhelix dimension) to a vb that represents the end of a double helix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vhelix_extent</strong> – 2-element array including the beginning and end of the virtual helix indices that you want to use</li>
+<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_alignment">
+<code class="descname">get_alignment</code><span class="sig-paren">(</span><em>trim</em>, <em>period</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the alignment of a pair of nucleotides, i.e. to see if ones that are supposed to line up do. Assumes no skip/loop / insertion/deletion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>trim</strong> – number of base pairs to trim at the ends</li>
+<li><strong>period</strong> – separation of pairs of base pairs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_arm_vec">
+<code class="descname">get_arm_vec</code><span class="sig-paren">(</span><em>vhc</em>, <em>vbc</em>, <em>vbn</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_arm_vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it returns a vector along an arm of a Holliday junction,
+or more generally, a vector pointing along a virtual helix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vhc</strong> – virtual helix index in cadnano</li>
+<li><strong>vbc</strong> – starting virtual base index in cadnano</li>
+<li><strong>vbn</strong> – ending virtual base index in cadnano</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_av_helix_axis">
+<code class="descname">get_av_helix_axis</code><span class="sig-paren">(</span><em>vhelix_extent=False</em>, <em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_av_helix_axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average helix axis. Optionally discard unbonded (but designed) ‘base-pairs’, and ignore the regions outside the ‘vhelix_extent’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vhelix_extent</strong> – 2-element array including the beginning and end of the virtual helix indices that you want to use</li>
+<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_backback_midpoint">
+<code class="descname">get_backback_midpoint</code><span class="sig-paren">(</span><em>n_index</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_backback_midpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the midpoint of 2 backbone vectors corresponding to nucleotides that are hybridised according to cadnano scheme.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n_index</strong> – nucleotide index</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_backback_vec">
+<code class="descname">get_backback_vec</code><span class="sig-paren">(</span><em>n_index</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_backback_vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vector between 2 backbones corresponding to nucleotides that are hybridised according to cadnano scheme.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n_index</strong> – nucleotide index</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_bb_midpoint">
+<code class="descname">get_bb_midpoint</code><span class="sig-paren">(</span><em>n_index</em>, <em>pbc=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_bb_midpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the midpoint of 2 base vectors corresponding to nucleotides that are hybridised according to cadnano scheme.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_index</strong> – nucleotide index</li>
+<li><strong>pbc</strong> – boolean. If true, use the minimum image: i.e. make sure we get a sensible answer if the</li>
+<li><strong>r1 and r2 correspond to nucleotides which were put at opposite</strong> (<em>positions</em>) – </li>
+<li><strong>of the box due to pbc's.</strong> (<em>ends</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_bb_vec">
+<code class="descname">get_bb_vec</code><span class="sig-paren">(</span><em>n_index</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_bb_vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vector between 2 bases corresponding to nucleotides that are hybridised according to cadnano scheme.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n_index</strong> – nucleotide index</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_bpwise_weave">
+<code class="descname">get_bpwise_weave</code><span class="sig-paren">(</span><em>vh_id</em>, <em>vvib_id</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_bpwise_weave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weave for a pair of base pairs located at (vh_id, vvib_id) and (vh_id + 1, vvib_id). Assumes no skip/loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh_id</strong> – virtual helix index in vhelix_indices</li>
+<li><strong>vvib_id</strong> – virtual base index in vvib</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_cad2cudadna">
+<code class="descname">get_cad2cudadna</code><span class="sig-paren">(</span><em>infile</em>, <em>visibility=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_cad2cudadna" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it is used for parsing the virt2nuc file when initialising an origami object.
+Users should not use this function directly.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>infile</strong> – path to virt2nuc file</li>
+<li><strong>visibility</strong> – path to visibility file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_com">
+<code class="descname">get_com</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_com" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not currently used.
+Unsupported/may no longer work - e.g. take care in using self.width and get_bb_midpoint.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_corners">
+<code class="descname">get_corners</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_corners" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it returns the indices of the nucleotides in the four corners of the origami.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_flat_nucs">
+<code class="descname">get_flat_nucs</code><span class="sig-paren">(</span><em>vh</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_flat_nucs" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it returns a list of nucleotides in a given virtual helix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vh</strong> – virtual helix index in cadnano</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_flat_units">
+<code class="descname">get_flat_units</code><span class="sig-paren">(</span><em>discard_unbonded</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_flat_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the width, height units of the origami if it had been laid out flat.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_h_bond_list">
+<code class="descname">get_h_bond_list</code><span class="sig-paren">(</span><em>infile</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_h_bond_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill in self.interaction_list for the current system self._sys;
+self.interaction_list[nucid1] is a list of nucleotides that nucid1 has hydrogen bonds with</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>infile</strong> – path to input file for DNAnalysis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_h_bond_list_output_bonds">
+<code class="descname">get_h_bond_list_output_bonds</code><span class="sig-paren">(</span><em>infile</em>, <em>conffile</em>, <em>conf_num</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_h_bond_list_output_bonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated function, use origami_utils.Origami.get_h_bond_list instead.</p>
+<p>The old (slow) version using output bonds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_hj_alignment">
+<code class="descname">get_hj_alignment</code><span class="sig-paren">(</span><em>start</em>, <em>period</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_hj_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find alignment of a pair of nucleotides, i.e. to see if ones that are supposed to line up do.</p>
+<p>Assumes exactly 2 virtual helices, no skip/loop / insertion/deletion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start</strong> – virtual base index of the first crossover (reading left to right)</li>
+<li><strong>period</strong> – separation of the pair of base pairs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_holliday_junctions">
+<code class="descname">get_holliday_junctions</code><span class="sig-paren">(</span><em>single=False</em>, <em>single_only=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_holliday_junctions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of hjs in format (vh, vb, vh_neighbour, vb_next). Assumes no insertions/deletions when using cad2cudadna.
+If somehow there were two holliday junctions between the same pairs of vbases (one for scaffold and one for staple strand), the 2nd would not be detected here.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>single</strong> – boolean. If true, returns a list of all single crossovers rather than holliday junctions (i.e. pairs of crossovers).</li>
+<li><strong>single_only</strong> – boolean. If true, returns a list of just single crossovers (double crossovers excluded). If single_only is true, the state of single should not matter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_junction_normal">
+<code class="descname">get_junction_normal</code><span class="sig-paren">(</span><em>hj</em>, <em>armlen=3</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_junction_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the normal vector of a Holliday junction. Assumes double crossover, no skip/loop (not sure if matters).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hj</strong> – should come from hjs[ii] where hjs=origami.get_holliday_junctions().</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_junction_normal2">
+<code class="descname">get_junction_normal2</code><span class="sig-paren">(</span><em>hj</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_junction_normal2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the normal vector of a Holliday junction. Assumes double crossover, no skip/loop (not sure if matters).</p>
+<p>A similar method to get_junction_normal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hj</strong> – should come from hjs[ii] where hjs=origami.get_holliday_junctions().</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_local_twist">
+<code class="descname">get_local_twist</code><span class="sig-paren">(</span><em>vh_id</em>, <em>vvib_id</em>, <em>type</em>, <em>conf=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_local_twist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the local twist between given vhelix, vbase and the next one along. Assumes no skip/loop / insertion/deletion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh_id</strong> – virtual helix index in vhelix_indices</li>
+<li><strong>vvib_id</strong> – virtual base index in vvib</li>
+<li><strong>type</strong> – “base” for base or “back” for backbone</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_n_bp">
+<code class="descname">get_n_bp</code><span class="sig-paren">(</span><em>vh</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_n_bp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of base pairs in a virtual helix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vh</strong> – virtual helix index in cadnano</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_n_nicks">
+<code class="descname">get_n_nicks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_n_nicks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of nicks (staple or scaffold) in an origami.
+Here a nick must be between adjacent strands (e.g. if a nucleotide is missing that isn’t counted as a nick at all).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_nearest_native_bonded">
+<code class="descname">get_nearest_native_bonded</code><span class="sig-paren">(</span><em>vhi</em>, <em>vb</em>, <em>increment</em>, <em>bound</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_nearest_native_bonded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the nearest natively bonded base-pair.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vhi</strong> – virtual helix index in vhelix_indices</li>
+<li><strong>vb</strong> – virtual base index in cadnano</li>
+<li><strong>increment</strong> – must be +1 or -1, the amount to increment the virtual base by when searching for a virtual base with a native bond</li>
+<li><strong>bound</strong> – if we get to this virtual base and we still haven’t found anything, we give up and throw and error</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_nicks">
+<code class="descname">get_nicks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_nicks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list [scaffold_nicks, staple_nicks], each of which is a list of nicked neighbours in the origami.
+Here a nick must be between adjacent strands (e.g. if a nucleotide is missing that isn’t counted as a nick at all).</p>
+<p>An element of each nick list has virtual helix number (NOT array index), virtual base 1, virtual base 2.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_nucleotides">
+<code class="descname">get_nucleotides</code><span class="sig-paren">(</span><em>vhelix</em>, <em>vbase</em>, <em>type='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_nucleotides" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a cadnano virtual helix index and a virtual base index, returns the nucleotide index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vhelix</strong> – virtual helix index in cadnano</li>
+<li><strong>vbase</strong> – virtual base index in cadnano</li>
+<li><strong>type</strong> – “scaf” for scaffold, “stap” for staple, “double” for both</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_plane_vecs">
+<code class="descname">get_plane_vecs</code><span class="sig-paren">(</span><em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_plane_vecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it sets self.vec_long and self.vec_lat for an origami_utils.Origami object.
+These are believed to be two vectors defining a plane of an origami.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_principal_axes">
+<code class="descname">get_principal_axes</code><span class="sig-paren">(</span><em>approxaxes</em>, <em>minnucs</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_principal_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unsupported function. Do not use.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_radius">
+<code class="descname">get_radius</code><span class="sig-paren">(</span><em>vh_id</em>, <em>vvib_id</em>, <em>new_method=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the radius of a base pair (i.e. the radius of helix). Assumes no skip/loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh_id</strong> – virtual helix index in vhelix_indices</li>
+<li><strong>vvib_id</strong> – virtual base index in vvib</li>
+<li><strong>new_method</strong> – boolean. If true, use a new method for getting the radius. It gives the same result for an ideal configuration but a greater radius for an equilibrated configuration.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_rise">
+<code class="descname">get_rise</code><span class="sig-paren">(</span><em>vh_id</em>, <em>vvib_id</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_rise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the rise for a base pair. Assumes no skip/loop.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh_id</strong> – virtual helix index in vhelix_indices</li>
+<li><strong>vvib_id</strong> – virtual base index in vvib</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_vh_midpoints">
+<code class="descname">get_vh_midpoints</code><span class="sig-paren">(</span><em>vhi</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_vh_midpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of base pair midpoints for a virtual helix. Effectively
+‘flattens’ a virtual helix, dealing with any skips or loops.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vhi</strong> – virtual helix index in vhelix_indices</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_vh_spline">
+<code class="descname">get_vh_spline</code><span class="sig-paren">(</span><em>vh</em>, <em>mode='midpoint'</em>, <em>vhelix_extent=False</em>, <em>discard_unbonded=True</em>, <em>force_circular=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_vh_spline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a cartesian spline for the base-base midpoints of a virtual helix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix number in cadnano</li>
+<li><strong>mode</strong> – “midpoint”, which fits a spline through the midpoint between the two strands; or “both strands”, which fits two splines through each strand.</li>
+<li><strong>vhelix_extent</strong> – 2-element array including the beginning and end of the virtual helix indices that you want to use</li>
+<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</li>
+<li><strong>force_circular</strong> – boolean. If true, force a closed curve; the ends of the midpoint curve (which is open) will be joined together by a straight line.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_vhelix_ds_length">
+<code class="descname">get_vhelix_ds_length</code><span class="sig-paren">(</span><em>vhi</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_vhelix_ds_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns length of double helix. Requires one continuous double strand - otherwise how is double strand length defined?</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vhi</strong> – virtual helix index in self.vhelix_indices</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_vhelix_neighbours">
+<code class="descname">get_vhelix_neighbours</code><span class="sig-paren">(</span><em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_vhelix_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it returns a neighbour list of virtual helices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>type</strong> – “sq” or “he”, corresponding to square or hexagonal lattice in cadnano</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.get_weave">
+<code class="descname">get_weave</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_weave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weave pattern as a list of lists. Each pair of virtual
+helices has a list associated with it. Each of those lists contains the
+interhelical distance as a function of base-pair index along the virtual
+helix.</p>
+<p>This method copes with insertions/deletions by creating a list of base-
+base midpoints for each virtual helix, and assuming that each pair of
+virtual helices has the same number of base-base midpoints. This should
+mean that the base pairs are fairly well lined up and results in a
+reasonable definition of the weave pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> – boolean. If true, prints skipped virtual helix pairs.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.has_full_hbond">
+<code class="descname">has_full_hbond</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.has_full_hbond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if all cadnano base-pairs at this virtual base have their correct base-pairs in the configuration.
+Assumes self.interaction_list is already filled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vb</strong> – virtual base index in cadnano</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.intra_helix_autocorr">
+<code class="descname">intra_helix_autocorr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.intra_helix_autocorr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the autocorrelation (i.e. the dot product) between the intra-helix
+vectors along each pair of virtual helices in the origami.</p>
+<p>This method does assume that the base pairs on adjacent virtual helices
+‘line up,’ in the sense that the list index of the closest base pair
+on one helix is the same as the index of the closest base pair on the
+neighbouring helix. A weak check for this is the condition that the
+lengths of the bbm lists (and so the number of base pairs in each virtual
+helix) are the same.</p>
+<p>Note that the list this method returns is indexed by the actual virtual
+helix number given by cadnano, not the ‘virtual helix index’ which
+indexes the self.vhelix_indices list.</p>
+<p>Run compute_vh_midpoints() first.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.is_crossover">
+<code class="descname">is_crossover</code><span class="sig-paren">(</span><em>vh</em>, <em>vhn</em>, <em>vb</em>, <em>strand_type</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.is_crossover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a boolean of whether a crossover of type strand_type span the squares (vh, vb) and (vhn, vb).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vhn</strong> – another virtual helix index in cadnano</li>
+<li><strong>vb</strong> – virtual base index in cadnano</li>
+<li><strong>strand_type</strong> – “scaffold” or “staple”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.is_junction">
+<code class="descname">is_junction</code><span class="sig-paren">(</span><em>vh</em>, <em>vb1</em>, <em>vb2</em>, <em>hjs_double</em>, <em>hjs_single</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.is_junction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns ‘double’ if double crossover, ‘single’ if single crossover, False otherwise</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vb1</strong> – virtual base index in cadnano (left square)</li>
+<li><strong>vb2</strong> – virtual base index in cadnano (right square)</li>
+<li><strong>hjs_double</strong> – array of holliday junctions (double crossovers). Should come from origami.get_holliday_junctions().</li>
+<li><strong>hjs_single</strong> – array of single crossovers. Should come from origami.get_holliday_junctions().</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.is_nicked">
+<code class="descname">is_nicked</code><span class="sig-paren">(</span><em>vh</em>, <em>vb1</em>, <em>vb2</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.is_nicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if there is a nick across vb1 and vb2, false otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vb1</strong> – first virtual bsae index in cadnano</li>
+<li><strong>vb2</strong> – second virtual base index in cadnano</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.is_strand_end">
+<code class="descname">is_strand_end</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>strand_type</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.is_strand_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns string “first” or “last” for first or last nucleotide of the strand, otherwise false. Assumes we don’t have any 1-nucleotide-long strands</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vb</strong> – virtual base index in cadnano</li>
+<li><strong>strand_type</strong> – “scaffold” or “staple”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.map_base_to_vbase">
+<code class="descname">map_base_to_vbase</code><span class="sig-paren">(</span><em>vhelices_len</em>, <em>begin_bases</em>, <em>end_bases</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.map_base_to_vbase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not used right now.</p>
+<p>Returns virtual base AND the index of the nucleotide at that virtual base (ie to deal with the possiblity of a loop).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.min_distance">
+<code class="descname">min_distance</code><span class="sig-paren">(</span><em>r1</em>, <em>r2</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.min_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum image distance in going from r1 to r2, in this system’s box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>r1</strong> – first vector</li>
+<li><strong>r2</strong> – second vector</li>
+<li><strong>box</strong> – box dimensions in a numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.old_get_corrug_weave">
+<code class="descname">old_get_corrug_weave</code><span class="sig-paren">(</span><em>vh1</em>, <em>vh2</em>, <em>vb</em>, <em>n</em>, <em>norm2</em>, <em>corrug_signed=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.old_get_corrug_weave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns distance between adjacent helices and decomposes into weave and corrugation
+for a pair of base pairs located at (vh1, vb) and (vh2, vb). Assumes no skip/loop.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.parse_vh_edge">
+<code class="descname">parse_vh_edge</code><span class="sig-paren">(</span><em>f_edge_vh</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.parse_vh_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of lists, each element corresponds to a vhelix number that is either in the top (vhelices1) or bottom (vhelices2) of the origami.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>f_edge_vh</strong> – path to vh_edge file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.parse_vhelix_extent_file">
+<code class="descname">parse_vhelix_extent_file</code><span class="sig-paren">(</span><em>vhelix_extentf</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.parse_vhelix_extent_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the vhelix_extent file and returns a list [vh_begin, vh_end], where vh_begin is a list of length
+&lt;number of virtual helices&gt; and each element being the left virtual base, and analogous for vh_end.</p>
+<p>vhelix_extent file example:
+10, 30</p>
+<p>This function could be extended to parse a file with different vh_begin and vh_end for each virtual helix;
+the machinery that uses this function should be able to deal with that without modification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vhelix_extentf</strong> – path to vhelix_extent file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.prepare_principal_axes_calc">
+<code class="descname">prepare_principal_axes_calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.prepare_principal_axes_calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unsupported function. Do not use.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.square_contains_exactly_one_nucleotide">
+<code class="descname">square_contains_exactly_one_nucleotide</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>strand_type</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.square_contains_exactly_one_nucleotide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a boolean of whether the square vh, vb contains exactly one nucleotide.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vb</strong> – virtual base index in cadnano</li>
+<li><strong>strand_type</strong> – “scaffold” or “staple”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.update_system">
+<code class="descname">update_system</code><span class="sig-paren">(</span><em>system</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.update_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it updates the system of the origami object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>system</strong> – base.System object. Can be obtained from readers.LorenzoReader.get_system</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.vb2nuci">
+<code class="descname">vb2nuci</code><span class="sig-paren">(</span><em>vhi</em>, <em>vb0</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.vb2nuci" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it returns the number of nucleotides corresponding to a given virtual helix and virtual base.
+It is not always 1 because of insertions/deletions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vhi</strong> – virtual helix index in self.vhelix_indices</li>
+<li><strong>vb0</strong> – virtual base index in cadnano (maybe, the author is not sure)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.vb2vhelix_nucid">
+<code class="descname">vb2vhelix_nucid</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>vb_nuci</em>, <em>mode='default'</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.vb2vhelix_nucid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a virtual helix, a virtual base, and a nucleotide id for that virtual base,
+returns the index of that nucleotide in a scheme where the leftmost (lowest virtual base index) nucleotide has index 0 and all nucleotides are given a unique integer index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vh</strong> – virtual helix index in cadnano</li>
+<li><strong>vb</strong> – virtual base index in cadnano</li>
+<li><strong>vb_nuci</strong> – index of particular nucleotide in the virtual base (if the virtual base does not have a loop there is always exactly one nucleotide, which has index 0)</li>
+<li><strong>mode</strong> – gets given to get_nucleotides as type; ‘default’ will count a vb that has either a scaffold or staple strand, while ‘double’ will only count vbs that have both a scaffold and staple strand.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.Origami.vbase_to_base">
+<code class="descname">vbase_to_base</code><span class="sig-paren">(</span><em>vhelix</em>, <em>vbase</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.vbase_to_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not used right now.</p>
+<p>Returns base corresponding to first base at a particular virtual base i.e. taking into account skips and loops (counting from the left of a cadnano diagram).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.angle_sense">
+<code class="descclassname">origami_utils.</code><code class="descname">angle_sense</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>axis</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.angle_sense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the angle between two vectors, using a 3rd vector to determine the sense of the angle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v1</strong> – first vector</li>
+<li><strong>v2</strong> – second vector</li>
+<li><strong>axis</strong> – third vector</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.array_index">
+<code class="descclassname">origami_utils.</code><code class="descname">array_index</code><span class="sig-paren">(</span><em>mylist</em>, <em>myarray</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.array_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index in a list mylist of a numpy array myarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mylist</strong> – list</li>
+<li><strong>myarray</strong> – numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.dihedral_angle_sense">
+<code class="descclassname">origami_utils.</code><code class="descname">dihedral_angle_sense</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>axis</em>, <em>sanity_check=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.dihedral_angle_sense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dihedral angle between two vectors, using a 3rd vector to determine the sense of the angle
+and to define the axis normal to the plane we want the vectors in</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v1</strong> – first vector</li>
+<li><strong>v2</strong> – second vector</li>
+<li><strong>axis</strong> – third vector</li>
+<li><strong>sanity_check</strong> – boolean. If true, check whether v1 and v2 are not too parallel to the axis, and returns false if either of them is.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_base_spline">
+<code class="descclassname">origami_utils.</code><code class="descname">get_base_spline</code><span class="sig-paren">(</span><em>strand</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_base_spline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a cartesian spline that represents a fit through the bases for the strand ‘strand’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>strand</strong> – base.Strand object</li>
+<li><strong>reverse</strong> – boolean. If true, strand is reversed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_bb_midpoint">
+<code class="descclassname">origami_utils.</code><code class="descname">get_bb_midpoint</code><span class="sig-paren">(</span><em>system</em>, <em>strand</em>, <em>n_index</em>, <em>interaction_list</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_bb_midpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated function, use origami_utils.Origami.get_bb_midpoint instead.</p>
+<p>Returns the midpoint vector between 2 hybridised bases.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_nucleotide">
+<code class="descclassname">origami_utils.</code><code class="descname">get_nucleotide</code><span class="sig-paren">(</span><em>vhelix</em>, <em>vbase</em>, <em>vhelix_indices</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_nucleotide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated function, use origami_utils.Origami.get_nucleotides instead.</p>
+<p>Returns the system nucleotide index of a nucleotide given a position on the origami.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_pos_midpoint">
+<code class="descclassname">origami_utils.</code><code class="descname">get_pos_midpoint</code><span class="sig-paren">(</span><em>r1</em>, <em>r2</em>, <em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_pos_midpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the midpoint of two vectors r1 and r2.</p>
+<p>Uses the minimum image: i.e. make sure we get a sensible answer if the
+positions r1 and r2 correspond to nucleotides which were put at opposite
+ends of the box due to periodic boundary conditions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>r1</strong> – first vector</li>
+<li><strong>r2</strong> – second vector</li>
+<li><strong>box</strong> – box dimensions in a numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_sayar_twist">
+<code class="descclassname">origami_utils.</code><code class="descname">get_sayar_twist</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em>, <em>smin</em>, <em>smax</em>, <em>npoints=1000</em>, <em>circular=False</em>, <em>integral_type='simple'</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_sayar_twist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the twist for a given pair of spline fits, one through the bases of each strand.
+Only works with circular strands now, although the default for circular is False.
+Probably a bug of the original script, but this will be fixed in the future.</p>
+<p>From Sayar et al. Phys. Rev. E, 81, 041916 (2010)</p>
+<p>Just need to integrate along the contour parameter s that is common to both splines.
+We need the normalised tangent vector to the spline formed by
+the midpoint of the two input splines t(s),
+the normalised normal vector formed by the vectors between the splines u(s),
+and the derivative of the normalised normal vector between the splines d/ds (u(s)).
+NB, the normal u(s) vector should be orthogonal to the tangent vector t(s); we ensure this by using only the component orthogonal to t(s).</p>
+<p>Using integral_type = ‘simple’ and npoints = 200, it will give a correct twist, or at least one that gives a conserved linking number when combined with get_sayar_writhe.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>s1</strong> – list of 3 splines corresponding to 3-D spline through strand 1’s bases (e.g. use get_base_spline())</li>
+<li><strong>s2</strong> – list of 3 splines corresponding to 3-D spline through strand 2’s bases – NB the splines should run in the same direction, i.e. one must reverse one of the splines if they come from get_base_spline (e.g. use get_base_spline(reverse = True))</li>
+<li><strong>smin</strong> – minimum value for s, which parameterises the splines</li>
+<li><strong>smax</strong> – maximum value for s, which parameterises the splines</li>
+<li><strong>npoints</strong> – number of points for the discrete integration</li>
+<li><strong>circular</strong> – boolean. If true, spline is circular.</li>
+<li><strong>integral_type</strong> – “simple”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_sayar_writhe">
+<code class="descclassname">origami_utils.</code><code class="descname">get_sayar_writhe</code><span class="sig-paren">(</span><em>splines1</em>, <em>smin</em>, <em>smax</em>, <em>splines2=False</em>, <em>npoints=1000</em>, <em>debug=False</em>, <em>circular=False</em>, <em>integral_type='simple'</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_sayar_writhe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the writhe for a 3D spline fit through a set of duplex midpoints.
+Only works with circular strands now, although the default for circular is False.
+Probably a bug of the original script, but this will be fixed in the future.</p>
+<p>From Sayar et al. Phys. Rev. E, 81, 041916 (2010).</p>
+<p>Using integral_type = ‘simple’ and npoints = 200, it will give a correct writhe, or at least one that gives a conserved linking number when combined with get_sayar_twist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>splines1</strong> – list of 3 splines corresponding to either (if not splines2) a 3D spline through the duplex or (if splines2) strand 1’s bases</li>
+<li><strong>smin</strong> – minimum value for s, which parameterises the splines</li>
+<li><strong>smax</strong> – maximum value for s, which parameterises the splines</li>
+<li><strong>splines2</strong> – optionally, (see splines1) list of 3 splines corresponding to a 3D spline through strand2’s bases</li>
+<li><strong>npoints</strong> – number of points for the discrete integration</li>
+<li><strong>debug</strong> – print a load of debugging information</li>
+<li><strong>circular</strong> – boolean. If true, spline is circular.</li>
+<li><strong>integral_type</strong> – “simple”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_scaffold_index">
+<code class="descclassname">origami_utils.</code><code class="descname">get_scaffold_index</code><span class="sig-paren">(</span><em>system</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_scaffold_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of the scaffold strand in the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>system</strong> – base.System object. Can be obtained from readers.LorenzoReader.get_system.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.get_vhelix_vis">
+<code class="descclassname">origami_utils.</code><code class="descname">get_vhelix_vis</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.get_vhelix_vis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the ‘virtual helix visibility’ from a text file and ignore any virtual helices set to invisible.</p>
+<p>The syntax is the same as for the base.py visibility.</p>
+<p>Modified from the base.py strand visibility parsing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> – path to visibility file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.min_distance">
+<code class="descclassname">origami_utils.</code><code class="descname">min_distance</code><span class="sig-paren">(</span><em>r1</em>, <em>r2</em>, <em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.min_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum image distance in going from r1 to r2, in a box of size box.</p>
+<p>Same as base.Nucleotide.distance().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>r1</strong> – first vector</li>
+<li><strong>r2</strong> – second vector</li>
+<li><strong>box</strong> – box dimensions in a numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.norm">
+<code class="descclassname">origami_utils.</code><code class="descname">norm</code><span class="sig-paren">(</span><em>vec</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a normalised vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vec</strong> – vector</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.open_arrow_debug_file">
+<code class="descclassname">origami_utils.</code><code class="descname">open_arrow_debug_file</code><span class="sig-paren">(</span><em>filename</em>, <em>type='w'</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.open_arrow_debug_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it is a debugging function for VMD.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.open_box_debug_file">
+<code class="descclassname">origami_utils.</code><code class="descname">open_box_debug_file</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.open_box_debug_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it is a debugging function for VMD.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.parse_scanfile">
+<code class="descclassname">origami_utils.</code><code class="descname">parse_scanfile</code><span class="sig-paren">(</span><em>infile</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.parse_scanfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it parses a “scan file”, the format and purpose of which is unclear.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>infile</strong> – path to scan file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.parse_vh_data">
+<code class="descclassname">origami_utils.</code><code class="descname">parse_vh_data</code><span class="sig-paren">(</span><em>filename</em>, <em>origami</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.parse_vh_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets vhelices data from file - format is either &lt;auto,[number of vhelices]&gt;,
+or, if a region of an origami is to be analysed,
+&lt;[region width],[list of starting nucleotide index for the region for each vhelix]&gt;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> – path to vhelix data file</li>
+<li><strong>origami</strong> – origami_utils.Origami object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.print_arrow_debug_line">
+<code class="descclassname">origami_utils.</code><code class="descname">print_arrow_debug_line</code><span class="sig-paren">(</span><em>begin</em>, <em>end</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.print_arrow_debug_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it is a debugging function for VMD.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.print_box_debug_line">
+<code class="descclassname">origami_utils.</code><code class="descname">print_box_debug_line</code><span class="sig-paren">(</span><em>vecs</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.print_box_debug_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it is a debugging function for VMD.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="origami_utils.vecs2spline">
+<code class="descclassname">origami_utils.</code><code class="descname">vecs2spline</code><span class="sig-paren">(</span><em>vecs</em>, <em>per</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vecs2spline" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function was not documented when it was written.
+The author of this documentation believes that it returns a spline interpolating the given vectors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vecs</strong> – list of vectors (arrays of length 3)</li>
+<li><strong>per</strong> – boolean. If true, forces spline to be periodic.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="origami_utils.vhelix_vbase_to_nucleotide">
+<em class="property">class </em><code class="descclassname">origami_utils.</code><code class="descname">vhelix_vbase_to_nucleotide</code><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class was not documented when it was written.
+The author of this documentation believes that it is used when initialising an origami object.
+Users should not use this class and its functions directly.</p>
+<dl class="method">
+<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_scaf">
+<code class="descname">add_scaf</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>strand</em>, <em>nuc</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_scaf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_scaf_strand">
+<code class="descname">add_scaf_strand</code><span class="sig-paren">(</span><em>add_strand</em>, <em>reference</em>, <em>continue_join=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_scaf_strand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_stap">
+<code class="descname">add_stap</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>strand</em>, <em>nuc</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_stap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_stap_strand">
+<code class="descname">add_stap_strand</code><span class="sig-paren">(</span><em>add_strand</em>, <em>reference</em>, <em>continue_join=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_stap_strand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_strand">
+<code class="descname">add_strand</code><span class="sig-paren">(</span><em>add_strand</em>, <em>reference</em>, <em>continue_join=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_strand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to oxDNA_UTILS’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="base.html"
+                        title="next chapter">base</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/origami_utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="base.html" title="base"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to oxDNA_UTILS’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">oxDNA_UTILS  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Marco Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>
