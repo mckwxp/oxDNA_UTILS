@@ -1145,19 +1145,19 @@ class System(object):
         for s in ss:
             if self.add_strand(s, check_overlap):
                 added.append(s)
-        if len(added) == len(ss):
-            return True
-        else:
-            for s in added:
-                Nucleotide.index -= s.N
-                Strand.index -= 1
-                self._strands.pop()
-                self._N -= s.N
-                self._N_strands -= 1
-                self._sequences.pop()
-            return False
+                if len(added) == len(ss):
+                    return True
+                else:
+                    for s in added:
+                        Nucleotide.index -= s.N
+                        Strand.index -= 1
+                        self._strands.pop()
+                        self._N -= s.N
+                        self._N_strands -= 1
+                        self._sequences.pop()
+                    return False
 
-        elif not self.add_strand(ss, check_overlap): return False
+            elif not self.add_strand(ss, check_overlap): return False
 
         return True
 
