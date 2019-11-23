@@ -1026,7 +1026,7 @@ class System(object):
         for n in self._nucleotides:
             cs = np.array((np.floor((n.cm_pos/self._box - np.rint(n.cm_pos / self._box ) + 0.5) * (1. - FLT_EPSILON) * self._box / self._cellsides)), np.int)
             cella = cs[0] + self._N_cells[0] * cs[1] + self._N_cells[0] * self._N_cells[1] * cs[2]
-        n.next = self._head[cella]
+            n.next = self._head[cella]
             self._head[cella] = n
         self.cells_done = True
         return
