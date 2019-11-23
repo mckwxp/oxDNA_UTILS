@@ -1,5 +1,8 @@
 import base
-import numpy as np
+try:
+    import numpy as np
+except:
+    import mynumpy as np
 import sys
 import subprocess
 import pickle
