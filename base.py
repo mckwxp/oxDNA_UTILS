@@ -1141,7 +1141,7 @@ class System(object):
 
     def add_strands(self, ss, check_overlap=True):
         if isinstance(ss, tuple) or isinstance(ss, list):
-        added = []
+            added = []
         for s in ss:
                     if self.add_strand(s, check_overlap):
                         added.append(s)
