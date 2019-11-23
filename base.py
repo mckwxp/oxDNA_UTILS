@@ -1143,8 +1143,8 @@ class System(object):
         if isinstance(ss, tuple) or isinstance(ss, list):
             added = []
         for s in ss:
-                    if self.add_strand(s, check_overlap):
-                        added.append(s)
+            if self.add_strand(s, check_overlap):
+                added.append(s)
         if len(added) == len(ss):
             return True
         else:
@@ -1153,7 +1153,7 @@ class System(object):
                 Strand.index -= 1
                 self._strands.pop()
                 self._N -= s.N
-                                self._N_strands -= 1
+                self._N_strands -= 1
                 self._sequences.pop()
             return False
 
