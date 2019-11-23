@@ -1,9 +1,14 @@
 """
 Utility functions for oxDNA.
+
 base.py includes the classes: System, Strand, Nucleotide
+
 - Make initial configurations (generate.py)
+
 - Generate PDB, Chimera, VMD files from trajectory/config (traj2pdb.py, traj2chimera.py, traj2tcl.py)
+
 - Get detailed energy information (process_data/)
+
 - If you want to use it with oxRNA, you have to set environment variable OXRNA to 1  (export OXRNA=1) 
 """
 import sys, os
@@ -50,22 +55,22 @@ def import_rna_model_constants():
         line = (partition (line.strip (), "//")[0]).strip ()
         #macro = line.partition("#define ")[2].strip().split(" ", 1)
         if  ('=' in line) and (not "float" in line ) and (not  "KEY_FOUND" in line ) and (not 'NULL' in line) and (not 'fopen' in line): 
-			macro = line.strip().split('=')
-				#macro = (partition (line, "=")[2]).strip().split(" ", 1)
-			if len(macro) > 1:
-			     key, val = [x.strip() for x in macro]
-			     # the f needed by c to interpret numbers as floats must be removed
-					 # this could be a source of bugs
-			     val = val.replace("f", "")
-			     val = val.replace(";","")
-			     # this awful exec is needed in order to get the right results out of macro definitions
-			     #print 'Importing ',key,val
-			     exec "tmp = %s" % (val)
-			     globals()[key] = tmp
+            macro = line.strip().split('=')
+                #macro = (partition (line, "=")[2]).strip().split(" ", 1)
+            if len(macro) > 1:
+                 key, val = [x.strip() for x in macro]
+                 # the f needed by c to interpret numbers as floats must be removed
+                     # this could be a source of bugs
+                 val = val.replace("f", "")
+                 val = val.replace(";","")
+                 # this awful exec is needed in order to get the right results out of macro definitions
+                 #print 'Importing ',key,val
+                 exec "tmp = %s" % (val)
+                 globals()[key] = tmp
     f.close()
 
 
-import_model_constants()	
+import_model_constants()    
 
 number_to_base = {0 : 'A', 1 : 'G', 2 : 'C', 3 : 'T'}
 
@@ -83,9 +88,9 @@ else:
     RNA=False                  
 
 if RNA:
-	import_rna_model_constants()
-	number_to_base = {0 : 'A', 1 : 'G', 2 : 'C', 3 : 'U'}
-	
+    import_rna_model_constants()
+    number_to_base = {0 : 'A', 1 : 'G', 2 : 'C', 3 : 'U'}
+    
 
 try:
     FLT_EPSILON = np.finfo(np.float).eps
@@ -270,7 +275,7 @@ class Nucleotide(Printable):
         if os.environ.get(GROOVE_ENV_VAR) == '1':
             return self.cm_pos + self._a1 * POS_MM_BACK1 + self._a2 * POS_MM_BACK2
         elif RNA:
-			return self.cm_pos + self._a1 * RNA_POS_BACK_a1 + self._a2 * RNA_POS_BACK_a2 + self._a3 * RNA_POS_BACK_a3
+            return self.cm_pos + self._a1 * RNA_POS_BACK_a1 + self._a2 * RNA_POS_BACK_a2 + self._a3 * RNA_POS_BACK_a3
         else:
             return self.cm_pos + self._a1 * POS_BACK
 
@@ -386,16 +391,16 @@ class Nucleotide(Printable):
         res += "O %lf %lf %lf\n" % (s2[0], s2[1], s2[2])
 
         return res
-		# This prints a sphere with a line around it, hopefully.
+        # This prints a sphere with a line around it, hopefully.
     def _get_TEP_vmd_xyz_output(self):
-				s1 = self.cm_pos_box
-				s2 = self.cm_pos_box + 0.3*self._a2
-				s3 = self.cm_pos_box + 0.15*self._a1
-				res = "C %lf %lf %lf\n" %tuple(s1)
-				res += "H %lf %lf %lf\n" %tuple(s2)
-				res += "He %lf %lf %lf\n" %tuple(s3)
-				
-				return res
+                s1 = self.cm_pos_box
+                s2 = self.cm_pos_box + 0.3*self._a2
+                s3 = self.cm_pos_box + 0.15*self._a1
+                res = "C %lf %lf %lf\n" %tuple(s1)
+                res += "H %lf %lf %lf\n" %tuple(s2)
+                res += "He %lf %lf %lf\n" %tuple(s3)
+                
+                return res
 
     def get_pdb_output(self, strtype, strsubid):
         s1 = self.cm_pos_box + self.get_pos_back_rel()
@@ -415,11 +420,11 @@ class Nucleotide(Printable):
         s3 = self.cm_pos_box + (POS_BACK + 0.68)*self._a1
         
         if RNA:
-			 #s1 = self_cm_pos_box + self.get_pos_back_rel()
-			 s2 = self.cm_pos_box
-			 s3 = self.cm_pos_box + (POS_BASE-0.1)*self._a1
-			 index_jump = 3
-			 
+             #s1 = self_cm_pos_box + self.get_pos_back_rel()
+             s2 = self.cm_pos_box
+             s3 = self.cm_pos_box + (POS_BASE-0.1)*self._a1
+             index_jump = 3
+             
         # some magic to get the nice ellipse for the base particle
         #s1 = self.cm_pos_box + POS_BACK* self._a1
         #s2 = self.cm_pos_box + (POS_BACK + 0.68)*self._a1
@@ -468,24 +473,24 @@ class Nucleotide(Printable):
             return False
 
     def check_interaction(self,interaction_type,nucleotide):
-		if(nucleotide in self.all_interactions[interaction_type].keys()):
-			return True
-		else:
-			return False
+        if(nucleotide in self.all_interactions[interaction_type].keys()):
+            return True
+        else:
+            return False
 
     def get_interaction(self,nucleotide,interaction_type):
-		if(nucleotide in self.all_interactions[interaction_type].keys()):
-			return self.all_interactions[interaction_type][nucleotide]
-		else:
-			return False
+        if(nucleotide in self.all_interactions[interaction_type].keys()):
+            return self.all_interactions[interaction_type][nucleotide]
+        else:
+            return False
 
     def add_interaction(self,interaction_type,nucleotide,interaction_value):
-		self.all_interactions[interaction_type][nucleotide] = interaction_value
+        self.all_interactions[interaction_type][nucleotide] = interaction_value
 
     def init_interactions(self):
-		self.all_interactions = {}
-		for i in range(8):
-			self.all_interactions[i] = {}
+        self.all_interactions = {}
+        for i in range(8):
+            self.all_interactions[i] = {}
 
     def _get_cylinder_output(self):
         # assume up to 1 interaction (h bond) per nucleotide
@@ -819,7 +824,7 @@ class Strand(Printable):
     def add_H_interaction(self,other_strand):
         if other_strand in self.H_interactions.keys():
             self.H_interactions[other_strand] += 1
-	else:
+    else:
             self.H_interactions[other_strand] = 1
 
     def get_H_interactions(self):
@@ -914,10 +919,10 @@ class System(object):
             s.bring_in_box_nucleotides(self._box)
 
     def copy (self):
-		copy = System (self._box)
-		for s in self._strands:
-			copy.add_strand (s.copy (), check_overlap=False)
-		return copy
+        copy = System (self._box)
+        for s in self._strands:
+            copy.add_strand (s.copy (), check_overlap=False)
+        return copy
 
     def get_reduced(self, according_to, bbox=None, check_overlap=False):
         visibility_list = self.get_visibility(according_to)
@@ -1021,7 +1026,7 @@ class System(object):
         for n in self._nucleotides:
             cs = np.array((np.floor((n.cm_pos/self._box - np.rint(n.cm_pos / self._box ) + 0.5) * (1. - FLT_EPSILON) * self._box / self._cellsides)), np.int)
             cella = cs[0] + self._N_cells[0] * cs[1] + self._N_cells[0] * self._N_cells[1] * cs[2]
-	    n.next = self._head[cella]
+        n.next = self._head[cella]
             self._head[cella] = n
         self.cells_done = True
         return
@@ -1131,26 +1136,26 @@ class System(object):
         self._strands.append(s)
         self._N += s.N
         self._N_strands += 1
-	self.cells_done = False
+    self.cells_done = False
         return True
 
     def add_strands(self, ss, check_overlap=True):
         if isinstance(ss, tuple) or isinstance(ss, list):
-		added = []
-		for s in ss:
+        added = []
+        for s in ss:
                     if self.add_strand(s, check_overlap):
                         added.append(s)
-		if len(added) == len(ss):
-			return True
-		else:
-			for s in added:
-				Nucleotide.index -= s.N
-				Strand.index -= 1
-				self._strands.pop()
-				self._N -= s.N
+        if len(added) == len(ss):
+            return True
+        else:
+            for s in added:
+                Nucleotide.index -= s.N
+                Strand.index -= 1
+                self._strands.pop()
+                self._N -= s.N
                                 self._N_strands -= 1
-				self._sequences.pop()
-			return False
+                self._sequences.pop()
+            return False
 
         elif not self.add_strand(ss, check_overlap): return False
 
@@ -1437,7 +1442,7 @@ class System(object):
         f = open(filename, flag)
         f.write(result)
         f.close()
-	
+    
         # we now generate a command file for chimera that can be loaded into
         # chimera to make sure that all the bonds are correct and that things
         # are colored the way we want
@@ -1530,7 +1535,7 @@ class System(object):
                 vals = line.split()
                 nuclA = int(vals[0])
                 nuclB = int(vals[1])
-		#print 'ADDING',nuclA,nuclB, float(vals[INT_HYDR+2])
+        #print 'ADDING',nuclA,nuclB, float(vals[INT_HYDR+2])
                 self.add_H_interaction(nuclA,nuclB,float(vals[INT_HYDR+2]))
 
     def read_H_bonds_output_bonds(self, inputpipe):
@@ -1553,7 +1558,7 @@ class System(object):
 
     def add_interaction(self,nuclA,nuclB,interaction_type,interaction_val):
             self._nucleotides[nuclA].add_interaction(interaction_type,nuclB,interaction_val)
-  	    self._nucleotides[nuclB].add_interaction(interaction_type,nuclA,interaction_val)
+          self._nucleotides[nuclB].add_interaction(interaction_type,nuclA,interaction_val)
 
     def get_interaction(self,nuclA,nuclB,interaction_type):
         return self._nucleotides[nuclA].get_interaction(nuclB,interaction_type)
@@ -1567,8 +1572,8 @@ class System(object):
                 self._strands[strandA].add_H_interaction(strandB)
             else:
                 self._strands[strandB].add_H_interaction(standA)
-	    self._nucleotides[nuclA].add_H_interaction(nuclB)
-	    self._nucleotides[nuclB].add_H_interaction(nuclA)
+        self._nucleotides[nuclA].add_H_interaction(nuclB)
+        self._nucleotides[nuclB].add_H_interaction(nuclA)
 
 
     def show_H_interactions(self):

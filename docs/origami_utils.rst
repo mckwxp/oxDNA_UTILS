@@ -8,4 +8,3 @@ origami_utils
 
 .. automodule:: origami_utils
    :members:
-   :undoc-members:

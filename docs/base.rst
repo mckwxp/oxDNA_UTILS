@@ -8,4 +8,3 @@ base
 
 .. automodule:: base
    :members:
-   :undoc-members:
