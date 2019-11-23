@@ -1,10 +1,10 @@
 """
 Utility functions for oxDNA.
 base.py includes the classes: System, Strand, Nucleotide
-    - Make initial configurations (generate.py)
-    - Generate PDB, Chimera, VMD files from trajectory/config (traj2pdb.py, traj2chimera.py, traj2tcl.py)
-    - Get detailed energy information (process_data/)
-    - If you want to use it with oxRNA, you have to set environment variable OXRNA to 1  (export OXRNA=1) 
+- Make initial configurations (generate.py)
+- Generate PDB, Chimera, VMD files from trajectory/config (traj2pdb.py, traj2chimera.py, traj2tcl.py)
+- Get detailed energy information (process_data/)
+- If you want to use it with oxRNA, you have to set environment variable OXRNA to 1  (export OXRNA=1) 
 """
 import sys, os
 try:
@@ -861,8 +861,7 @@ class System(object):
     Contains strands
 
     Arguments:
-    box -- the box size of the system
-        Ex: box = [50, 50, 50]
+    box -- the box size of the system, e.g. box = [50, 50, 50]
 
     time --- Time of the system
 
