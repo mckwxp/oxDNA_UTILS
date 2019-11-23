@@ -1136,7 +1136,7 @@ class System(object):
         self._strands.append(s)
         self._N += s.N
         self._N_strands += 1
-    self.cells_done = False
+        self.cells_done = False
         return True
 
     def add_strands(self, ss, check_overlap=True):
