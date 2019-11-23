@@ -1557,8 +1557,8 @@ class System(object):
                 self.add_H_interaction(nuclA,nuclB,float(vals[INT_HYDR+2]))
 
     def add_interaction(self,nuclA,nuclB,interaction_type,interaction_val):
-            self._nucleotides[nuclA].add_interaction(interaction_type,nuclB,interaction_val)
-          self._nucleotides[nuclB].add_interaction(interaction_type,nuclA,interaction_val)
+        self._nucleotides[nuclA].add_interaction(interaction_type,nuclB,interaction_val)
+        self._nucleotides[nuclB].add_interaction(interaction_type,nuclA,interaction_val)
 
     def get_interaction(self,nuclA,nuclB,interaction_type):
         return self._nucleotides[nuclA].get_interaction(nuclB,interaction_type)
