@@ -1,5 +1,7 @@
 """
 Reader for oxDNA configurations and topologies.
+
+readers.py includes the class: LorenzoReader
 """
 
 import base
