@@ -1,5 +1,5 @@
 """
-Utility functions for DNA origami designed in cadnano and simulated in oxDNA.
+Utility functions for DNA origamis designed in cadnano and simulated in oxDNA.
 
 origami_utils.py includes the class: Origami
 """

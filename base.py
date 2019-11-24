@@ -1,5 +1,5 @@
 """
-Utility functions for oxDNA.
+Utility functions for oxDNA systems, strands and nucleotides.
 
 base.py includes the classes: System, Strand, Nucleotide
 """
