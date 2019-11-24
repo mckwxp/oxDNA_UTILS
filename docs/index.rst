@@ -6,17 +6,35 @@
 Welcome to oxDNA UTILS documentation!
 =======================================
 
+.. toctree::
+   :caption: Contents:
+   :hidden:
+       
+   generate
+   output_bonds
+
+Scripts
+========
+
++-------------------+---------------------------------------------------+
+|:doc:`generate`    | Generates oxDNA configuration and topology files. |
++-------------------+---------------------------------------------------+
+|:doc:`output_bonds`| Prints out all interactions in the system.        |
++-------------------+---------------------------------------------------+
+
+Modules
+=======
 .. autosummary::
    :toctree:
 
-   origami_utils
    base
+   origami_utils
    readers
-   generate
 
-Indices and tables
+Index
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+
+.. * :ref:`modindex`
+.. * :ref:`search`

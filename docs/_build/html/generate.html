@@ -35,7 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="readers" href="readers.html" /> 
+    <link rel="next" title="output_bonds" href="output_bonds.html" />
+    <link rel="prev" title="Welcome to oxDNA UTILS documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,11 +80,15 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
 </ul>
 
             
@@ -148,22 +153,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-generate">
-<span id="generate"></span><h1>generate<a class="headerlink" href="#module-generate" title="Permalink to this headline">¶</a></h1>
-<p>Utility for generating oxDNA configuration and topology files.</p>
-<dl class="function">
-<dt id="generate.read_strands">
-<code class="descclassname">generate.</code><code class="descname">read_strands</code><span class="sig-paren">(</span><em>filename='caca.sqs'</em>, <em>box_side=50</em><span class="sig-paren">)</span><a class="headerlink" href="#generate.read_strands" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates oxDNA configuration and topology files.
-Reads a text file with the following format:</p>
-<blockquote>
-<div><ul class="simple">
+  <div class="section" id="generate">
+<h1>generate<a class="headerlink" href="#generate" title="Permalink to this headline">¶</a></h1>
+<p>Generates oxDNA configuration and topology files.</p>
+<p>Usage:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">generate</span><span class="o">.</span><span class="n">py</span> <span class="n">filename</span> <span class="n">box_side</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>filename: path to text file with a format described below</li>
+<li>box_side: length of box side</li>
+</ul>
+</dd>
+</dl>
+<p>Reads a text file with the following format:</p>
+<ul class="simple">
 <li>Each line contains the sequence for a single strand (A,C,T,G). The nucleotides can be specified by (case insensitive) letter (A, C, G, T), random (X), strong (S) and weak (W).</li>
 <li>Options: DOUBLE, CIRCULAR, DOUBLE CIRCULAR</li>
 </ul>
-</div></blockquote>
-<p class="rubric">Example</p>
-<ul>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><ul class="first last">
 <li><p class="first">Two ssDNA (single stranded DNA):</p>
 <blockquote>
 <div><p>ATATATA</p>
@@ -188,25 +200,13 @@ Reads a text file with the following format:</p>
 </li>
 <li><p class="first">Two strands, one double stranded circular, the other single stranded circular:</p>
 <blockquote>
-<div><p>DOUBLE CIRCULAR AGAGGTAGGAGGATTTGCTTGAGCTTCGAGAGCTTCGAGATTCGATCAGGGCT
-CIRCULAR CCTGTAAGGAGATCGGAGAGATTCGAGAGGATCTGAGAGCTTAGCT</p>
+<div><p>DOUBLE CIRCULAR AGAGGTAGGAGGATTTGCTTGAGCTTCGAGAGCTTCGAGATTCGATCAGGGCT</p>
+<p>CIRCULAR CCTGTAAGGAGATCGGAGAGATTCGAGAGGATCTGAGAGCTTAGCT</p>
 </div></blockquote>
 </li>
 </ul>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filename</strong> – path to text file with a format described above</li>
-<li><strong>box_side</strong> – length of box side</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+</dd>
+</dl>
 </div>
 
 
@@ -217,8 +217,10 @@ CIRCULAR CCTGTAAGGAGATCGGAGAGATTCGAGAGGATCTGAGAGCTTAGCT</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="output_bonds.html" class="btn btn-neutral float-right" title="output_bonds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="readers.html" class="btn btn-neutral float-left" title="readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to oxDNA UTILS documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
