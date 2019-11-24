@@ -2,14 +2,6 @@
 Utility functions for oxDNA.
 
 base.py includes the classes: System, Strand, Nucleotide
-
-- Make initial configurations (generate.py)
-
-- Generate PDB, Chimera, VMD files from trajectory/config (traj2pdb.py, traj2chimera.py, traj2tcl.py)
-
-- Get detailed energy information (process_data/)
-
-- If you want to use it with oxRNA, you have to set environment variable OXRNA to 1  (export OXRNA=1) 
 """
 import sys, os
 try:
@@ -196,32 +188,34 @@ class Printable(object):
 
 class Nucleotide(Printable):
     """
-    Nucleotides compose Strands
+    Nucleotides compose Strands.
 
-    cm_pos --- Center of mass position
-        Ex: [0, 0, 0]
-
-    a1 --- Unit vector indicating orientation of backbone with respect to base
-        Ex: [1, 0, 0]
-
-    a3 --- Unit vector indicating orientation (tilting )of base with respect to backbone
-        Ex: [0, 0, 1]
-
-    base --- Identity of base, which must be designated with either numbers or
-        letters (this is called type in the c++ code). Confusingly enough, this
+    Args:
+        cm_pos: Center of mass position, e.g. [0, 0, 0]
+        a1: Unit vector indicating orientation of backbone with respect to base, e.g. [1, 0, 0]
+        a3: Unit vector indicating orientation (tilting) of base with respect to backbone, e.g. [0, 0, 1]
+        base: Identity of base, which must be designated with either numbers or \
+        letters (this is called type in the c++ code). Confusingly enough, this \
         is similar to Particle.btype in oxDNA.
-        
-        Number: {0,1,2,3} or any number in between (-inf,-7) and (10, inf)
-        To use specific sequences (or an alphabet large than four) one should
-        start from the complementary pair 10 and -7. Complementary pairs are
-        such that base_1 + base_2 = 3;
-        
-        Letter: {A,G,T,C} (these will be translated to {0, 1, 3, 2}).
-        
-        These are set in the dictionaries: number_to_base, base_to_number
-    
-    btype--- Identity of base. Unused at the moment.
 
+            Number: {0,1,2,3} or any number in between (-inf,-7) and (10, inf). \
+            To use specific sequences (or an alphabet large than four) one should \
+            start from the complementary pair 10 and -7. Complementary pairs are \
+            such that base_1 + base_2 = 3
+
+            Letter: {A,G,T,C} (these will be translated to {0, 1, 3, 2}). \
+            These are set in the dictionaries: number_to_base, base_to_number
+            
+        btype: Identity of base. Unused at the moment.
+        L: Angular velocity
+        v: Velocity
+
+    Attributes:
+        cm_pos: Position of the center of mass.
+        index: Index of the nucleotide.
+        pos_back: Position of the backbone centroid.
+        pos_base: Position of the base centroid.
+        pos_stack: Position of the stacking site centroid.
     """
     index = 0
 
@@ -254,24 +248,22 @@ class Nucleotide(Printable):
         self.init_interactions()
 
     def get_pos_base (self):
-        """
-        Returns the position of the base centroid
-        Note that cm_pos is the centrod of the backbone and base.
-        """
+        #Note that cm_pos is the centroid of the backbone and base.
+        
         return self.cm_pos + self._a1 * POS_BASE
 
     pos_base = property(get_pos_base)
 
     def get_pos_stack (self):
+        #Note that cm_pos is the centroid of the backbone and base.
+
         return self.cm_pos + self._a1 * POS_STACK
 
     pos_stack = property (get_pos_stack)
 
     def get_pos_back (self):
-        """
-        Returns the position of the backbone centroid
-        Note that cm_pos is the centrod of the backbone and base.
-        """
+        #Note that cm_pos is the centroid of the backbone and base.
+
         if os.environ.get(GROOVE_ENV_VAR) == '1':
             return self.cm_pos + self._a1 * POS_MM_BACK1 + self._a2 * POS_MM_BACK2
         elif RNA:
@@ -283,8 +275,8 @@ class Nucleotide(Printable):
 
     def get_pos_back_rel (self):
         """
-        Returns the position of the backbone centroid relative to the centre of mass
-        i.e. it will be a vector pointing from the c.o.m. to the backbone
+        Returns the position of the backbone centroid relative to the centre of mass,
+        i.e. it will be a vector pointing from the c.o.m. to the backbone.
         """
         return self.get_pos_back() - self.cm_pos
 
@@ -294,6 +286,13 @@ class Nucleotide(Printable):
     _a2 = property (get_a2)
 
     def copy(self, disp=None, rot=None):
+        """
+        Returns a copy of the nucleotide, with optional translation and/or rotation.
+
+        Args:
+            disp: displacement vector to translate the copied nucleotide
+            rot: rotation matrix to rotate the copied nucleotide
+        """
         copy = Nucleotide(self.cm_pos, self._a1, self._a3, self._base, self._btype, self._L, self._v, self.n3)
         if disp is not None:
             copy.translate(disp)
@@ -303,6 +302,12 @@ class Nucleotide(Printable):
         return copy
 
     def translate(self, disp):
+        """
+        Translates the nucleotide.
+
+        Args:
+            disp: displacement vector to translate the nucleotide
+        """
         self.cm_pos += disp
         #self.pos_base += disp
         #self.pos_stack += disp
@@ -311,6 +316,13 @@ class Nucleotide(Printable):
         except: pass
 
     def rotate(self, R, origin=None):
+        """
+        Rotates the nucleotide.
+
+        Args:
+            R: rotation matrix to rotate the nucleotide
+            origin: the point around which the nucleotide rotates; defaults to be self.cm_pos
+        """
         if origin is None:
             origin = self.cm_pos
 
@@ -324,6 +336,14 @@ class Nucleotide(Printable):
         #self.pos_back = self.cm_pos + self._a1 * POS_BACK
 
     def distance (self, other, PBC=True, box=None):
+        """
+        Returns the distance to another nucleotide.
+
+        Args:
+            other: the other Nucleotide object
+            PBC: boolean. If true, considers periodic boundary conditions and returns the minimum image distance.
+            box: box dimensions in a numpy array 
+        """
         if PBC and box is None:
             if not (isinstance (box, np.ndarray) and len(box) == 3):
                 Logger.die ("distance between nucleotides: if PBC is True, box must be a numpy array of length 3");
@@ -334,24 +354,9 @@ class Nucleotide(Printable):
 
     def get_base(self):
         """
-        Returns a number containing base id
-        >>> v1 = np.array([0.,0.,0.])
-        >>> v2 = np.array([1.,0.,0.])
-        >>> v3 = np.array([0.,0.,1.])
-        >>> Nucleotide(v1, v2, v3, 'A').get_base()
-        'A'
-        >>> Nucleotide(v1, v2, v3, "C").get_base()
-        'C'
-        >>> Nucleotide(v1, v2, v3, "G").get_base()
-        'G'
-        >>> Nucleotide(v1, v2, v3, "T").get_base()
-        'T'
-        >>> Nucleotide(v1, v2, v3, 1).get_base()
-        'G'
-        >>> Nucleotide(v1, v2, v3, 103).get_base()
-        '103'
-        >>> Nucleotide(v1, v2, v3, -97).get_base()
-        '-97'
+        Returns the base id. 
+        If the base is in ["A", "G", "C", "T", 0, 1, 2, 3], returns a string containing the letter of the base id. 
+        Otherwise, returns a string containing the number of the base id.
         """
         if type(self._base) is not int:
             try:
@@ -503,8 +508,14 @@ class Nucleotide(Printable):
 
 class Strand(Printable):
     """
-    Strand composed of Nucleotides
-    Strands can be contained in System
+    Strands are composed of Nucleotides.
+    Strands can be contained in a System.
+
+    Attributes:
+        N: Length of the strand (i.e. the number of nucleotides).
+        sequence: Sequence of the strand.
+        cm_pos: Center of mass of the strand.
+        index: Index of the strand.
     """
     index = 0
 
@@ -539,6 +550,9 @@ class Strand(Printable):
         return ni + n + 1
 
     def copy(self):
+        """
+        Returns a copy of the strand.
+        """
         copy = Strand()
         for n in self._nucleotides:
             copy.add_nucleotide(n.copy())
@@ -548,16 +562,35 @@ class Strand(Printable):
         return self._cm_pos
 
     def set_cm_pos(self, new_pos):
+        """
+        Sets the center of mass of the strand to a new position by moving all the nucleotides.
+
+        Args:
+            new_pos: new center of mass position
+        """
         diff = new_pos - self._cm_pos
         for n in self._nucleotides: n.translate(diff)
 
         self._cm_pos = new_pos
 
     def translate(self, amount):
+        """
+        Translates the strand.
+
+        Args:
+            amount: displacement vector to translate the strand
+        """
         new_pos = self._cm_pos + amount
         self.set_cm_pos(new_pos)
 
     def rotate(self, R, origin=None):
+        """
+        Rotates the strand.
+
+        Args:
+            R: rotation matrix to rotate the system
+            origin: the point around which the strand rotates; defaults to be self.cm_pos (NB this does not exist at the moment, perhaps a bug)
+        """
         if origin is None:
             origin = self.cm_pos
 
@@ -566,6 +599,13 @@ class Strand(Printable):
         self._cm_pos = np.dot(R, self._cm_pos - origin) + origin
 
     def append (self, other):
+        """
+        Returns an extended strand which is formed by appending another strand to the current strand. 
+        Note that the current strand is not changed.
+
+        Args:
+            other: the other Strand object
+        """
         if not isinstance (other, Strand):
             raise ValueError
 
@@ -584,6 +624,13 @@ class Strand(Printable):
         return ret
 
     def get_slice(self, start=0, end=None):
+        """
+        Returns a slice of the strand.
+
+        Args:
+            start: starting point of the slice (default is 0)
+            end: ending point of the slice (default is end of strand)
+        """
         if end is None: end = len(self._nucleotides)
         ret = Strand()
         for i in range(start, end):
@@ -591,6 +638,12 @@ class Strand(Printable):
         return ret
 
     def set_sequence(self, seq):
+        """
+        Sets the sequence of the strand.
+
+        Args:
+            seq: either a string of letters (A,T,C,G), or a list of ints (0,1,2,3). Should have the same length as the strand.
+        """
         if isinstance (seq, str):
             seq = [base_to_number[x] for x in seq]
         if len(seq) != len(self._nucleotides):
@@ -603,11 +656,23 @@ class Strand(Printable):
         self._sequence = seq
 
     def bring_in_box_nucleotides(self, box):
+        """
+        Brings nucleotides of the strand back into the box.
+
+        Args:
+            box: box dimensions in a numpy array
+        """
         diff = np.rint(self.cm_pos / box ) * box
         for n in self._nucleotides:
             n.cm_pos_box = n.cm_pos - diff
 
     def add_nucleotide(self, n):
+        """
+        Adds a nucleotide to the strand.
+
+        Args:
+            n: Nucleotide object to be added.
+        """
         if len(self._nucleotides) == 0:
             self._first = n.index
         n.strand = self.index
@@ -618,6 +683,13 @@ class Strand(Printable):
         self.sequence.append(n._base)
 
     def overlaps_with (self, other, box):
+        """
+        Returns True if this strand overlaps with the other strand, False otherwise.
+
+        Args:
+            other: the other Strand object
+            box: box dimensions in a numpy array
+        """
         import energies as en
 
         EXC_VOL_CUTOFF = 2.0
@@ -831,6 +903,12 @@ class Strand(Printable):
         return self.H_interactions
 
     def make_circular(self, check_join_len=False):
+        """
+        Connect the ends of the strand to make it circular.
+
+        Args:
+            check_join_len: boolean. If true, checks whether the ends of the strand are close enough.
+        """
         if check_join_len:
             dr = self._nucleotides[-1].distance (self._nucleotides[0], PBC=False)
             if np.sqrt(np.dot (dr, dr)) > (0.7525 + 0.25):
@@ -839,6 +917,9 @@ class Strand(Printable):
         self._circular = True
 
     def make_noncircular(self):
+        """
+        Disconnect the ends of a circular strand.
+        """
         self._circular = False
 
 
@@ -862,18 +943,20 @@ def parse_visibility(path):
 
 class System(object):
     """
-    Object representing an oxDNA system
-    Contains strands
+    Object representing an oxDNA system. Contains strands.
 
-    Arguments:
-    box -- the box size of the system, e.g. box = [50, 50, 50]
+    Args:
+        box: Box size of the system, e.g. box = [50, 50, 50]
+        time: Time of the system
+        E_pot: Potential energy
+        E_kin: Kinetic energy
 
-    time --- Time of the system
-
-    E_pot --- Potential energy
-
-    E_kin --- Kinetic energy
-
+    Attributes:
+        N: Number of nucleotides in the system.
+        N_strands: Number of strands in the system.
+        E_pot: Potential energy
+        E_kin: Kinetic energy
+        E_tot: Total energy
     """
     chimera_count = 1
 
@@ -897,6 +980,9 @@ class System(object):
         self.cells_done = False
 
     def get_sequences (self):
+        """
+        Returns the sequence of the system as a list of lists containing strand sequences.
+        """
         return [x._sequence for x in self._strands]
 
     _sequences = property (get_sequences)
@@ -919,12 +1005,23 @@ class System(object):
             s.bring_in_box_nucleotides(self._box)
 
     def copy (self):
+        """
+        Returns a copy of the system.
+        """
         copy = System (self._box)
         for s in self._strands:
             copy.add_strand (s.copy (), check_overlap=False)
         return copy
 
     def get_reduced(self, according_to, bbox=None, check_overlap=False):
+        """
+        Returns a reduced copy of the system with only strands set to be visible in the visibility file.
+
+        Args:
+            according_to: path to visibility file
+            bbox: box size of the reduced system
+            check_overlap: boolean. If true, checks for strand overlap.
+        """
         visibility_list = self.get_visibility(according_to)
 
         if bbox is None or bbox is True:
@@ -942,6 +1039,13 @@ class System(object):
         return copy
 
     def join(self, other, box=None):
+        """
+        Returns a system formed by joining this system with another system.
+
+        Args:
+            other: the other System object
+            box: box size in a numpy array
+        """
         if box is None:
             box = np.array([0.,0.,0.])
             for i in range(3):
@@ -1007,6 +1111,12 @@ class System(object):
         return visibility_list
 
     def set_visibility(self, arg=None):
+        """
+        Sets visibility according to a visibility file.
+
+        Args:
+            arg: visibility file
+        """
         visibility_list = self.get_visibility(arg)
 
         for i in range(self._N_strands):
@@ -1103,6 +1213,9 @@ class System(object):
         return res
 
     def contains_overlaps (self):
+        """
+        Returns True if the system contains strand overlaps, False otherwise.
+        """
         res = False
         N = self._N_strands
         for i in range(0, N):
@@ -1114,10 +1227,11 @@ class System(object):
 
     def add_strand(self, s, check_overlap=True):
         """
-        Add a Strand to the System
+        Adds a Strand to the System. Returns True if non-overlapping, False otherwise.
 
-        Returns True if non-overlapping
-        Returns False if there is overlap
+        Args:
+            s: Strand object to be added
+            check_overlap: boolean. If true, checks for overlap. Defaults to be true.
         """
         if check_overlap and self.is_overlapping(s):
             Nucleotide.index -= s.N
@@ -1140,6 +1254,13 @@ class System(object):
         return True
 
     def add_strands(self, ss, check_overlap=True):
+        """
+        Adds multiple Strands to the System. Returns True if non-overlapping, False otherwise.
+
+        Args:
+            ss: List of Strand objects to be added
+            check_overlap: boolean. If true, checks for overlap. Defaults to be true.
+        """
         if isinstance(ss, tuple) or isinstance(ss, list):
             added = []
         for s in ss:
@@ -1162,16 +1283,32 @@ class System(object):
         return True
 
     def get_unique_seq(self):
+        """
+        Returns the unique sequences in the system.
+        """
         # we need only the unique sequences of the system
         # see http://stackoverflow.com/questions/1143379/removing-duplicates-from-list-of-lists-in-python
         unique_seq = dict((str(x), x) for x in self._sequences).values()
         return unique_seq
 
     def rotate (self, amount, origin=None):
+        """
+        Rotates the system.
+
+        Args:
+            amount: rotation matrix
+            origin: the point around which the system rotates
+        """
         for s in self._strands:
             s.rotate (amount, origin)
 
     def translate (self, amount):
+        """
+        Translates the system.
+
+        Args:
+            amount: displacement vector to translate the system
+        """
         for s in self._strands:
             s.translate (amount)
 
@@ -1409,13 +1546,13 @@ class System(object):
         f.close()
 
     def print_pdb_output_chimera(self,filename,append=False, visibility=None, domain=[],colour_by_seq=False):
-        """
-        Outputs to chimera format using custon procedure
-        Note that this is the only output procedure which supports incrementing MODEL numbers
-        This allowed MODELs to be read as a trajectory or set submodels when loaded in Chimera
-        Also supports circular DNA
+        
+        #Outputs to chimera format using custon procedure
+        #Note that this is the only output procedure which supports incrementing MODEL numbers
+        #This allowed MODELs to be read as a trajectory or set submodels when loaded in Chimera
+        #Also supports circular DNA
 
-        """
+        
 
 
         self._prepare(visibility)
@@ -1515,6 +1652,9 @@ class System(object):
     N_strands = property (get_N_strands)
 
     def get_nucleotide_list (self):
+        """
+        Returns a list of Nucleotide objects in the system.
+        """
         ret = []
         for s in self._strands:
             ret += s._nucleotides
@@ -1523,7 +1663,9 @@ class System(object):
     _nucleotides = property (get_nucleotide_list)
 
     def map_nucleotides_to_strands(self):
-        #this function creates nucl_id -> strand_id array
+        """
+        Fills the nucl_id -> strand_id array.
+        """
         index = 0
         for i in range(len(self._strands)):
             for j in range(self._strands[i].get_length()):

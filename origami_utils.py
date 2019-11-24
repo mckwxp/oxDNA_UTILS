@@ -1,3 +1,8 @@
+"""
+Utility functions for DNA origami designed in cadnano and simulated in oxDNA.
+
+origami_utils.py includes the class: Origami
+"""
 import base
 try:
     import numpy as np
@@ -616,11 +621,6 @@ def dihedral_angle_sense(v1, v2, axis, sanity_check = False):
     return angle
 
 class vhelix_vbase_to_nucleotide(object):
-    """
-    This class was not documented when it was written.
-    The author of this documentation believes that it is used when initialising an origami object.
-    Users should not use this class and its functions directly.
-    """
     # at the moment squares with skips in have entries in the dicts but with the nucleotide list empty (rather than having no entry) - I'm not sure whether or not this is desirable. It's probably ok
     def __init__(self):
         self._scaf = {}
@@ -2656,6 +2656,5 @@ class Origami(object):
         Args:
             r1: first vector
             r2: second vector
-            box: box dimensions in a numpy array
         """
         return min_distance(r1, r2, self._sys._box)
