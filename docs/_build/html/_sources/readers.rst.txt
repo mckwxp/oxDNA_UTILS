@@ -8,4 +8,3 @@ readers
 
 .. automodule:: readers
    :members:
-   :undoc-members:

@@ -34,9 +34,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="base" href="base.html" />
-    <link rel="prev" title="Welcome to oxDNA_UTILS’s documentation!" href="index.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,11 +78,10 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">origami_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="stubs/origami_utils.html">origami_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stubs/base.html">base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stubs/readers.html">readers</a></li>
 </ul>
 
             
@@ -151,6 +148,8 @@
             
   <div class="section" id="module-origami_utils">
 <span id="origami-utils"></span><h1>origami_utils<a class="headerlink" href="#module-origami_utils" title="Permalink to this headline">¶</a></h1>
+<p>Utility functions for DNA origami designed in cadnano and simulated in oxDNA.</p>
+<p>origami_utils.py includes the class: Origami</p>
 <dl class="class">
 <dt id="origami_utils.Origami">
 <em class="property">class </em><code class="descclassname">origami_utils.</code><code class="descname">Origami</code><span class="sig-paren">(</span><em>system=False</em>, <em>cad2cuda_file=False</em>, <em>visibility=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami" title="Permalink to this definition">¶</a></dt>
@@ -948,7 +947,6 @@ indexes the self.vhelix_indices list.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>r1</strong> – first vector</li>
 <li><strong>r2</strong> – second vector</li>
-<li><strong>box</strong> – box dimensions in a numpy array</li>
 </ul>
 </td>
 </tr>
@@ -1405,39 +1403,6 @@ The author of this documentation believes that it returns a spline interpolating
 </table>
 </dd></dl>
 
-<dl class="class">
-<dt id="origami_utils.vhelix_vbase_to_nucleotide">
-<em class="property">class </em><code class="descclassname">origami_utils.</code><code class="descname">vhelix_vbase_to_nucleotide</code><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class was not documented when it was written.
-The author of this documentation believes that it is used when initialising an origami object.
-Users should not use this class and its functions directly.</p>
-<dl class="method">
-<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_scaf">
-<code class="descname">add_scaf</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>strand</em>, <em>nuc</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_scaf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_scaf_strand">
-<code class="descname">add_scaf_strand</code><span class="sig-paren">(</span><em>add_strand</em>, <em>reference</em>, <em>continue_join=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_scaf_strand" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_stap">
-<code class="descname">add_stap</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em>, <em>strand</em>, <em>nuc</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_stap" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_stap_strand">
-<code class="descname">add_stap_strand</code><span class="sig-paren">(</span><em>add_strand</em>, <em>reference</em>, <em>continue_join=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_stap_strand" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="origami_utils.vhelix_vbase_to_nucleotide.add_strand">
-<code class="descname">add_strand</code><span class="sig-paren">(</span><em>add_strand</em>, <em>reference</em>, <em>continue_join=False</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.vhelix_vbase_to_nucleotide.add_strand" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -1445,15 +1410,6 @@ Users should not use this class and its functions directly.</p>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="base.html" class="btn btn-neutral float-right" title="base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to oxDNA_UTILS’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

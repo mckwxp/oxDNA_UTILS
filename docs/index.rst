@@ -3,16 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to oxDNA_UTILS's documentation!
+Welcome to oxDNA UTILS documentation!
 =======================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. autosummary::
+   :toctree: stubs
 
-   origami_utils.rst
-   base.rst
-   readers.rst
+   origami_utils
+   base
+   readers
 
 Indices and tables
 ==================

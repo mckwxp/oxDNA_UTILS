@@ -34,9 +34,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="readers" href="readers.html" />
-    <link rel="prev" title="origami_utils" href="origami_utils.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,11 +78,10 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="stubs/origami_utils.html">origami_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stubs/base.html">base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stubs/readers.html">readers</a></li>
 </ul>
 
             
@@ -151,620 +148,548 @@
             
   <div class="section" id="module-base">
 <span id="base"></span><h1>base<a class="headerlink" href="#module-base" title="Permalink to this headline">¶</a></h1>
-<p>Utility functions for oxDNA.
-base.py includes the classes: System, Strand, Nucleotide
-- Make initial configurations (generate.py)
-- Generate PDB, Chimera, VMD files from trajectory/config (traj2pdb.py, traj2chimera.py, traj2tcl.py)
-- Get detailed energy information (process_data/)
-- If you want to use it with oxRNA, you have to set environment variable OXRNA to 1  (export OXRNA=1)</p>
-<dl class="class">
-<dt id="base.Logger">
-<em class="property">class </em><code class="descclassname">base.</code><code class="descname">Logger</code><a class="headerlink" href="#base.Logger" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
-<dt id="base.Logger.CRITICAL">
-<code class="descname">CRITICAL</code><em class="property"> = 3</em><a class="headerlink" href="#base.Logger.CRITICAL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Logger.DEBUG">
-<code class="descname">DEBUG</code><em class="property"> = 0</em><a class="headerlink" href="#base.Logger.DEBUG" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Logger.INFO">
-<code class="descname">INFO</code><em class="property"> = 1</em><a class="headerlink" href="#base.Logger.INFO" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Logger.WARNING">
-<code class="descname">WARNING</code><em class="property"> = 2</em><a class="headerlink" href="#base.Logger.WARNING" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Logger.debug_level">
-<code class="descname">debug_level</code><em class="property"> = None</em><a class="headerlink" href="#base.Logger.debug_level" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="staticmethod">
-<dt id="base.Logger.die">
-<em class="property">static </em><code class="descname">die</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Logger.die" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="staticmethod">
-<dt id="base.Logger.log">
-<em class="property">static </em><code class="descname">log</code><span class="sig-paren">(</span><em>msg</em>, <em>level=None</em>, <em>additional=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Logger.log" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Logger.messages">
-<code class="descname">messages</code><em class="property"> = ('DEBUG', 'INFO', 'WARNING', 'CRITICAL')</em><a class="headerlink" href="#base.Logger.messages" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<p>Utility functions for oxDNA.</p>
+<p>base.py includes the classes: System, Strand, Nucleotide</p>
 <dl class="class">
 <dt id="base.Nucleotide">
 <em class="property">class </em><code class="descclassname">base.</code><code class="descname">Nucleotide</code><span class="sig-paren">(</span><em>cm_pos</em>, <em>a1</em>, <em>a3</em>, <em>base</em>, <em>btype=None</em>, <em>L=array([0.</em>, <em>0.</em>, <em>0.])</em>, <em>v=array([0.</em>, <em>0.</em>, <em>0.])</em>, <em>n3=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide" title="Permalink to this definition">¶</a></dt>
-<dd><p>Nucleotides compose Strands</p>
-<dl class="docutils">
-<dt>cm_pos — Center of mass position</dt>
-<dd>Ex: [0, 0, 0]</dd>
-<dt>a1 — Unit vector indicating orientation of backbone with respect to base</dt>
-<dd>Ex: [1, 0, 0]</dd>
-<dt>a3 — Unit vector indicating orientation (tilting )of base with respect to backbone</dt>
-<dd>Ex: [0, 0, 1]</dd>
-<dt>base — Identity of base, which must be designated with either numbers or</dt>
-<dd><p class="first">letters (this is called type in the c++ code). Confusingly enough, this
-is similar to Particle.btype in oxDNA.</p>
-<p>Number: {0,1,2,3} or any number in between (-inf,-7) and (10, inf)
-To use specific sequences (or an alphabet large than four) one should
-start from the complementary pair 10 and -7. Complementary pairs are
-such that base_1 + base_2 = 3;</p>
-<p>Letter: {A,G,T,C} (these will be translated to {0, 1, 3, 2}).</p>
-<p class="last">These are set in the dictionaries: number_to_base, base_to_number</p>
-</dd>
-</dl>
-<p>btype— Identity of base. Unused at the moment.</p>
-<dl class="method">
-<dt id="base.Nucleotide.add_H_interaction">
-<code class="descname">add_H_interaction</code><span class="sig-paren">(</span><em>nucleotide</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.add_H_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.add_interaction">
-<code class="descname">add_interaction</code><span class="sig-paren">(</span><em>interaction_type</em>, <em>nucleotide</em>, <em>interaction_value</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.add_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.check_H_interaction">
-<code class="descname">check_H_interaction</code><span class="sig-paren">(</span><em>nucleotide</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.check_H_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.check_interaction">
-<code class="descname">check_interaction</code><span class="sig-paren">(</span><em>interaction_type</em>, <em>nucleotide</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.check_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><em>disp=None</em>, <em>rot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.copy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.distance">
-<code class="descname">distance</code><span class="sig-paren">(</span><em>other</em>, <em>PBC=True</em>, <em>box=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.distance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_a2">
-<code class="descname">get_a2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_a2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_base">
-<code class="descname">get_base</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_base" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a number containing base id
-&gt;&gt;&gt; v1 = np.array([0.,0.,0.])
-&gt;&gt;&gt; v2 = np.array([1.,0.,0.])
-&gt;&gt;&gt; v3 = np.array([0.,0.,1.])
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, ‘A’).get_base()
-‘A’
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, “C”).get_base()
-‘C’
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, “G”).get_base()
-‘G’
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, “T”).get_base()
-‘T’
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, 1).get_base()
-‘G’
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, 103).get_base()
-‘103’
-&gt;&gt;&gt; Nucleotide(v1, v2, v3, -97).get_base()
-‘-97’</p>
+<dd><p>Nucleotides compose Strands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cm_pos</strong> – Center of mass position, e.g. [0, 0, 0]</li>
+<li><strong>a1</strong> – Unit vector indicating orientation of backbone with respect to base, e.g. [1, 0, 0]</li>
+<li><strong>a3</strong> – Unit vector indicating orientation (tilting) of base with respect to backbone, e.g. [0, 0, 1]</li>
+<li><strong>base</strong> – <p>Identity of base, which must be designated with either numbers or         letters (this is called type in the c++ code). Confusingly enough, this         is similar to Particle.btype in oxDNA.</p>
+<p>Number: {0,1,2,3} or any number in between (-inf,-7) and (10, inf).             To use specific sequences (or an alphabet large than four) one should             start from the complementary pair 10 and -7. Complementary pairs are             such that base_1 + base_2 = 3</p>
+<p>Letter: {A,G,T,C} (these will be translated to {0, 1, 3, 2}).             These are set in the dictionaries: number_to_base, base_to_number</p>
+</li>
+<li><strong>btype</strong> – Identity of base. Unused at the moment.</li>
+<li><strong>L</strong> – Angular velocity</li>
+<li><strong>v</strong> – Velocity</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="base.Nucleotide.cm_pos">
+<code class="descname">cm_pos</code><a class="headerlink" href="#base.Nucleotide.cm_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of the center of mass.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_interaction">
-<code class="descname">get_interaction</code><span class="sig-paren">(</span><em>nucleotide</em>, <em>interaction_type</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_pdb_output">
-<code class="descname">get_pdb_output</code><span class="sig-paren">(</span><em>strtype</em>, <em>strsubid</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pdb_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_pdb_output_chimera">
-<code class="descname">get_pdb_output_chimera</code><span class="sig-paren">(</span><em>strtype</em>, <em>strsubid</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pdb_output_chimera" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_pos_back">
-<code class="descname">get_pos_back</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pos_back" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the position of the backbone centroid
-Note that cm_pos is the centrod of the backbone and base.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_pos_back_rel">
-<code class="descname">get_pos_back_rel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pos_back_rel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the position of the backbone centroid relative to the centre of mass
-i.e. it will be a vector pointing from the c.o.m. to the backbone</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_pos_base">
-<code class="descname">get_pos_base</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pos_base" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the position of the base centroid
-Note that cm_pos is the centrod of the backbone and base.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.get_pos_stack">
-<code class="descname">get_pos_stack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pos_stack" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="base.Nucleotide.index">
-<code class="descname">index</code><em class="property"> = 0</em><a class="headerlink" href="#base.Nucleotide.index" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Nucleotide.init_interactions">
-<code class="descname">init_interactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.init_interactions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">index</code><a class="headerlink" href="#base.Nucleotide.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of the nucleotide.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="base.Nucleotide.pos_back">
 <code class="descname">pos_back</code><a class="headerlink" href="#base.Nucleotide.pos_back" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the position of the backbone centroid
-Note that cm_pos is the centrod of the backbone and base.</p>
+<dd><p>Position of the backbone centroid.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="base.Nucleotide.pos_base">
 <code class="descname">pos_base</code><a class="headerlink" href="#base.Nucleotide.pos_base" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the position of the base centroid
-Note that cm_pos is the centrod of the backbone and base.</p>
+<dd><p>Position of the base centroid.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="base.Nucleotide.pos_stack">
 <code class="descname">pos_stack</code><a class="headerlink" href="#base.Nucleotide.pos_stack" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Position of the stacking site centroid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Nucleotide.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><em>disp=None</em>, <em>rot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the nucleotide, with optional translation and/or rotation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>disp</strong> – displacement vector to translate the copied nucleotide</li>
+<li><strong>rot</strong> – rotation matrix to rotate the copied nucleotide</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Nucleotide.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>other</em>, <em>PBC=True</em>, <em>box=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance to another nucleotide.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>other</strong> – the other Nucleotide object</li>
+<li><strong>PBC</strong> – boolean. If true, considers periodic boundary conditions and returns the minimum image distance.</li>
+<li><strong>box</strong> – box dimensions in a numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Nucleotide.get_base">
+<code class="descname">get_base</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the base id.
+If the base is in [“A”, “G”, “C”, “T”, 0, 1, 2, 3], returns a string containing the letter of the base id.
+Otherwise, returns a string containing the number of the base id.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Nucleotide.get_pos_back_rel">
+<code class="descname">get_pos_back_rel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.get_pos_back_rel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the position of the backbone centroid relative to the centre of mass,
+i.e. it will be a vector pointing from the c.o.m. to the backbone.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.Nucleotide.rotate">
 <code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>origin=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.rotate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Rotates the nucleotide.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>R</strong> – rotation matrix to rotate the nucleotide</li>
+<li><strong>origin</strong> – the point around which the nucleotide rotates; defaults to be self.cm_pos</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.Nucleotide.translate">
 <code class="descname">translate</code><span class="sig-paren">(</span><em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Nucleotide.translate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dd><p>Translates the nucleotide.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>disp</strong> – displacement vector to translate the nucleotide</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
-
-<dl class="class">
-<dt id="base.Printable">
-<em class="property">class </em><code class="descclassname">base.</code><code class="descname">Printable</code><a class="headerlink" href="#base.Printable" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="base.Printable.get_output">
-<code class="descname">get_output</code><span class="sig-paren">(</span><em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Printable.get_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="base.Strand">
 <em class="property">class </em><code class="descclassname">base.</code><code class="descname">Strand</code><a class="headerlink" href="#base.Strand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Strand composed of Nucleotides
-Strands can be contained in System</p>
+<dd><p>Strands are composed of Nucleotides.
+Strands can be contained in a System.</p>
 <dl class="attribute">
 <dt id="base.Strand.N">
 <code class="descname">N</code><a class="headerlink" href="#base.Strand.N" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.add_H_interaction">
-<code class="descname">add_H_interaction</code><span class="sig-paren">(</span><em>other_strand</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.add_H_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.add_nucleotide">
-<code class="descname">add_nucleotide</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.add_nucleotide" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.append">
-<code class="descname">append</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.append" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.bring_in_box_nucleotides">
-<code class="descname">bring_in_box_nucleotides</code><span class="sig-paren">(</span><em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.bring_in_box_nucleotides" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Strand.cm_pos">
-<code class="descname">cm_pos</code><a class="headerlink" href="#base.Strand.cm_pos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.copy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_H_interactions">
-<code class="descname">get_H_interactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_H_interactions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_cm_pos">
-<code class="descname">get_cm_pos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_cm_pos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_length">
-<code class="descname">get_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_length" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_pdb_output">
-<code class="descname">get_pdb_output</code><span class="sig-paren">(</span><em>domain=[]</em>, <em>strand=0</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_pdb_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_pdb_output_chimera">
-<code class="descname">get_pdb_output_chimera</code><span class="sig-paren">(</span><em>domain=[]</em>, <em>strand=0</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_pdb_output_chimera" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_sequence">
-<code class="descname">get_sequence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_sequence" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_slice">
-<code class="descname">get_slice</code><span class="sig-paren">(</span><em>start=0</em>, <em>end=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_slice" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_tcl_detailed_output">
-<code class="descname">get_tcl_detailed_output</code><span class="sig-paren">(</span><em>labels=True</em>, <em>index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_tcl_detailed_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.get_tcl_output">
-<code class="descname">get_tcl_output</code><span class="sig-paren">(</span><em>labels=True</em>, <em>index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_tcl_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.Strand.index">
-<code class="descname">index</code><em class="property"> = 0</em><a class="headerlink" href="#base.Strand.index" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.make_circular">
-<code class="descname">make_circular</code><span class="sig-paren">(</span><em>check_join_len=False</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.make_circular" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.make_noncircular">
-<code class="descname">make_noncircular</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.make_noncircular" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.overlaps_with">
-<code class="descname">overlaps_with</code><span class="sig-paren">(</span><em>other</em>, <em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.overlaps_with" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.Strand.rotate">
-<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>origin=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.rotate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Length of the strand (i.e. the number of nucleotides).</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="base.Strand.sequence">
 <code class="descname">sequence</code><a class="headerlink" href="#base.Strand.sequence" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Sequence of the strand.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="base.Strand.cm_pos">
+<code class="descname">cm_pos</code><a class="headerlink" href="#base.Strand.cm_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Center of mass of the strand.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="base.Strand.index">
+<code class="descname">index</code><a class="headerlink" href="#base.Strand.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of the strand.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.add_nucleotide">
+<code class="descname">add_nucleotide</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.add_nucleotide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a nucleotide to the strand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> – Nucleotide object to be added.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an extended strand which is formed by appending another strand to the current strand.
+Note that the current strand is not changed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – the other Strand object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.bring_in_box_nucleotides">
+<code class="descname">bring_in_box_nucleotides</code><span class="sig-paren">(</span><em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.bring_in_box_nucleotides" title="Permalink to this definition">¶</a></dt>
+<dd><p>Brings nucleotides of the strand back into the box.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>box</strong> – box dimensions in a numpy array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the strand.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.get_slice">
+<code class="descname">get_slice</code><span class="sig-paren">(</span><em>start=0</em>, <em>end=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.get_slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a slice of the strand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start</strong> – starting point of the slice (default is 0)</li>
+<li><strong>end</strong> – ending point of the slice (default is end of strand)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.make_circular">
+<code class="descname">make_circular</code><span class="sig-paren">(</span><em>check_join_len=False</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.make_circular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the ends of the strand to make it circular.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>check_join_len</strong> – boolean. If true, checks whether the ends of the strand are close enough.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.make_noncircular">
+<code class="descname">make_noncircular</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.make_noncircular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect the ends of a circular strand.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.overlaps_with">
+<code class="descname">overlaps_with</code><span class="sig-paren">(</span><em>other</em>, <em>box</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.overlaps_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this strand overlaps with the other strand, False otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>other</strong> – the other Strand object</li>
+<li><strong>box</strong> – box dimensions in a numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.Strand.rotate">
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>R</em>, <em>origin=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the strand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>R</strong> – rotation matrix to rotate the system</li>
+<li><strong>origin</strong> – the point around which the strand rotates; defaults to be self.cm_pos (NB this does not exist at the moment, perhaps a bug)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.Strand.set_cm_pos">
 <code class="descname">set_cm_pos</code><span class="sig-paren">(</span><em>new_pos</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.set_cm_pos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Sets the center of mass of the strand to a new position by moving all the nucleotides.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>new_pos</strong> – new center of mass position</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.Strand.set_sequence">
 <code class="descname">set_sequence</code><span class="sig-paren">(</span><em>seq</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.set_sequence" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Sets the sequence of the strand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seq</strong> – either a string of letters (A,T,C,G), or a list of ints (0,1,2,3). Should have the same length as the strand.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.Strand.translate">
 <code class="descname">translate</code><span class="sig-paren">(</span><em>amount</em><span class="sig-paren">)</span><a class="headerlink" href="#base.Strand.translate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Translates the strand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>amount</strong> – displacement vector to translate the strand</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="base.System">
 <em class="property">class </em><code class="descclassname">base.</code><code class="descname">System</code><span class="sig-paren">(</span><em>box</em>, <em>time=0</em>, <em>E_pot=0</em>, <em>E_kin=0</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System" title="Permalink to this definition">¶</a></dt>
-<dd><p>Object representing an oxDNA system
-Contains strands</p>
-<p>Arguments:
-box – the box size of the system, e.g. box = [50, 50, 50]</p>
-<p>time — Time of the system</p>
-<p>E_pot — Potential energy</p>
-<p>E_kin — Kinetic energy</p>
+<dd><p>Object representing an oxDNA system. Contains strands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>box</strong> – Box size of the system, e.g. box = [50, 50, 50]</li>
+<li><strong>time</strong> – Time of the system</li>
+<li><strong>E_pot</strong> – Potential energy</li>
+<li><strong>E_kin</strong> – Kinetic energy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="attribute">
 <dt id="base.System.N">
 <code class="descname">N</code><a class="headerlink" href="#base.System.N" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Number of nucleotides in the system.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="base.System.N_strands">
 <code class="descname">N_strands</code><a class="headerlink" href="#base.System.N_strands" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Number of strands in the system.</p>
+</dd></dl>
 
-<dl class="method">
-<dt id="base.System.add_H_interaction">
-<code class="descname">add_H_interaction</code><span class="sig-paren">(</span><em>nuclA</em>, <em>nuclB</em>, <em>interaction</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.add_H_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dl class="attribute">
+<dt id="base.System.E_pot">
+<code class="descname">E_pot</code><a class="headerlink" href="#base.System.E_pot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Potential energy</p>
+</dd></dl>
 
-<dl class="method">
-<dt id="base.System.add_interaction">
-<code class="descname">add_interaction</code><span class="sig-paren">(</span><em>nuclA</em>, <em>nuclB</em>, <em>interaction_type</em>, <em>interaction_val</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.add_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dl class="attribute">
+<dt id="base.System.E_kin">
+<code class="descname">E_kin</code><a class="headerlink" href="#base.System.E_kin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kinetic energy</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="base.System.E_tot">
+<code class="descname">E_tot</code><a class="headerlink" href="#base.System.E_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total energy</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.add_strand">
 <code class="descname">add_strand</code><span class="sig-paren">(</span><em>s</em>, <em>check_overlap=True</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.add_strand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a Strand to the System</p>
-<p>Returns True if non-overlapping
-Returns False if there is overlap</p>
+<dd><p>Adds a Strand to the System. Returns True if non-overlapping, False otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>s</strong> – Strand object to be added</li>
+<li><strong>check_overlap</strong> – boolean. If true, checks for overlap. Defaults to be true.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="base.System.add_strands">
 <code class="descname">add_strands</code><span class="sig-paren">(</span><em>ss</em>, <em>check_overlap=True</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.add_strands" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.check_H_interaction">
-<code class="descname">check_H_interaction</code><span class="sig-paren">(</span><em>nucleotideA</em>, <em>nucleotideB</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.check_H_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="base.System.chimera_count">
-<code class="descname">chimera_count</code><em class="property"> = 1</em><a class="headerlink" href="#base.System.chimera_count" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds multiple Strands to the System. Returns True if non-overlapping, False otherwise.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ss</strong> – List of Strand objects to be added</li>
+<li><strong>check_overlap</strong> – boolean. If true, checks for overlap. Defaults to be true.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.contains_overlaps">
 <code class="descname">contains_overlaps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.contains_overlaps" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns True if the system contains strand overlaps, False otherwise.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.copy">
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.copy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.do_cells">
-<code class="descname">do_cells</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.do_cells" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.get_N_Nucleotides">
-<code class="descname">get_N_Nucleotides</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_N_Nucleotides" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.get_N_strands">
-<code class="descname">get_N_strands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_N_strands" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.get_interaction">
-<code class="descname">get_interaction</code><span class="sig-paren">(</span><em>nuclA</em>, <em>nuclB</em>, <em>interaction_type</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_interaction" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a copy of the system.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.get_nucleotide_list">
 <code class="descname">get_nucleotide_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_nucleotide_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a list of Nucleotide objects in the system.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.get_reduced">
 <code class="descname">get_reduced</code><span class="sig-paren">(</span><em>according_to</em>, <em>bbox=None</em>, <em>check_overlap=False</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_reduced" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a reduced copy of the system with only strands set to be visible in the visibility file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>according_to</strong> – path to visibility file</li>
+<li><strong>bbox</strong> – box size of the reduced system</li>
+<li><strong>check_overlap</strong> – boolean. If true, checks for strand overlap.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.get_sequences">
 <code class="descname">get_sequences</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_sequences" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.get_tcl_cylinder">
-<code class="descname">get_tcl_cylinder</code><span class="sig-paren">(</span><em>mystrand</em>, <em>labels=True</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_tcl_cylinder" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the sequence of the system as a list of lists containing strand sequences.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.get_unique_seq">
 <code class="descname">get_unique_seq</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_unique_seq" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.get_visibility">
-<code class="descname">get_visibility</code><span class="sig-paren">(</span><em>arg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.get_visibility" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.is_overlapping">
-<code class="descname">is_overlapping</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.is_overlapping" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.is_overlapping_better">
-<code class="descname">is_overlapping_better</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.is_overlapping_better" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the unique sequences in the system.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.join">
 <code class="descname">join</code><span class="sig-paren">(</span><em>other</em>, <em>box=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.join" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a system formed by joining this system with another system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>other</strong> – the other System object</li>
+<li><strong>box</strong> – box size in a numpy array</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.map_nucleotides_to_strands">
 <code class="descname">map_nucleotides_to_strands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.map_nucleotides_to_strands" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_TEP_vmd_xyz_output">
-<code class="descname">print_TEP_vmd_xyz_output</code><span class="sig-paren">(</span><em>xyz_name='out.xyz'</em>, <em>append=False</em>, <em>same_colors=False</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_TEP_vmd_xyz_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_crepy_output">
-<code class="descname">print_crepy_output</code><span class="sig-paren">(</span><em>cpy_name</em>, <em>same_colors=False</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_crepy_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_dot_bracket_output">
-<code class="descname">print_dot_bracket_output</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_dot_bracket_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_lorenzo_output">
-<code class="descname">print_lorenzo_output</code><span class="sig-paren">(</span><em>conf_name</em>, <em>top_name</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_lorenzo_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_pdb_output">
-<code class="descname">print_pdb_output</code><span class="sig-paren">(</span><em>filename</em>, <em>append=False</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_pdb_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_pdb_output_chimera">
-<code class="descname">print_pdb_output_chimera</code><span class="sig-paren">(</span><em>filename</em>, <em>append=False</em>, <em>visibility=None</em>, <em>domain=[]</em>, <em>colour_by_seq=False</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_pdb_output_chimera" title="Permalink to this definition">¶</a></dt>
-<dd><p>Outputs to chimera format using custon procedure
-Note that this is the only output procedure which supports incrementing MODEL numbers
-This allowed MODELs to be read as a trajectory or set submodels when loaded in Chimera
-Also supports circular DNA</p>
+<dd><p>Fills the nucl_id -&gt; strand_id array.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_ribbon_output">
-<code class="descname">print_ribbon_output</code><span class="sig-paren">(</span><em>name</em>, <em>same_colors=False</em>, <em>visibility=None</em>, <em>constr_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_ribbon_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_tcl_cylinder_output">
-<code class="descname">print_tcl_cylinder_output</code><span class="sig-paren">(</span><em>filename='out.tcl'</em>, <em>show_box=True</em>, <em>show_labels=True</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_tcl_cylinder_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_tcl_detailed_output">
-<code class="descname">print_tcl_detailed_output</code><span class="sig-paren">(</span><em>outname='out.tcl'</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_tcl_detailed_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_tcl_output">
-<code class="descname">print_tcl_output</code><span class="sig-paren">(</span><em>outname='out.tcl'</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_tcl_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.print_vmd_xyz_output">
-<code class="descname">print_vmd_xyz_output</code><span class="sig-paren">(</span><em>xyz_name='out.xyz'</em>, <em>append=False</em>, <em>same_colors=False</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_vmd_xyz_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.read_H_bonds">
-<code class="descname">read_H_bonds</code><span class="sig-paren">(</span><em>inputpipe</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.read_H_bonds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.read_H_bonds_output_bonds">
-<code class="descname">read_H_bonds_output_bonds</code><span class="sig-paren">(</span><em>inputpipe</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.read_H_bonds_output_bonds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.read_all_interactions">
-<code class="descname">read_all_interactions</code><span class="sig-paren">(</span><em>inputpipe</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.read_all_interactions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="base.System.rotate">
 <code class="descname">rotate</code><span class="sig-paren">(</span><em>amount</em>, <em>origin=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.rotate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Rotates the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>amount</strong> – rotation matrix</li>
+<li><strong>origin</strong> – the point around which the system rotates</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.set_visibility">
 <code class="descname">set_visibility</code><span class="sig-paren">(</span><em>arg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.set_visibility" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.show_H_interactions">
-<code class="descname">show_H_interactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.show_H_interactions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.tcl_cylinder_type">
-<code class="descname">tcl_cylinder_type</code><span class="sig-paren">(</span><em>nuc1</em>, <em>nuc2</em>, <em>v1</em>, <em>v2</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.tcl_cylinder_type" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="base.System.tcl_sphere_type">
-<code class="descname">tcl_sphere_type</code><span class="sig-paren">(</span><em>nuc1</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.tcl_sphere_type" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Sets visibility according to a visibility file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg</strong> – visibility file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="base.System.translate">
 <code class="descname">translate</code><span class="sig-paren">(</span><em>amount</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.translate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dd><p>Translates the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>amount</strong> – displacement vector to translate the system</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="function">
-<dt id="base.import_model_constants">
-<code class="descclassname">base.</code><code class="descname">import_model_constants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.import_model_constants" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="base.import_rna_model_constants">
-<code class="descclassname">base.</code><code class="descname">import_rna_model_constants</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.import_rna_model_constants" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="base.parse_visibility">
-<code class="descclassname">base.</code><code class="descname">parse_visibility</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#base.parse_visibility" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="base.partition">
-<code class="descclassname">base.</code><code class="descname">partition</code><span class="sig-paren">(</span><em>s</em>, <em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#base.partition" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 </div>
 
@@ -773,15 +698,6 @@ Also supports circular DNA</p>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="readers.html" class="btn btn-neutral float-right" title="readers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="origami_utils.html" class="btn btn-neutral float-left" title="origami_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

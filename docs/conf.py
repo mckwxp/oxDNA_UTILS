@@ -40,11 +40,13 @@ release = u''
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
 ]
-#autodoc_default_options = {'special-members': '__init__', 'undoc-members': True}
+
+autosummary_generate = True
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -100,7 +102,7 @@ html_static_path = ['_static']
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-# html_sidebars = {}
+html_sidebars = {'**':['localtoc.html', 'navigation.html', 'relations.html', 'sourcelink.html', 'searchbox.html']}
 
 
 # -- Options for HTMLHelp output ---------------------------------------------
