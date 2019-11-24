@@ -1,3 +1,7 @@
+"""
+Reader for oxDNA configurations and topologies.
+"""
+
 import base
 try:
     import numpy as np
