@@ -7,7 +7,7 @@ Welcome to oxDNA UTILS documentation!
 =======================================
 
 .. autosummary::
-   :toctree: stubs
+   :toctree:
 
    origami_utils
    base
