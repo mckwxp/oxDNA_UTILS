@@ -1,5 +1,5 @@
 """
-Reader for oxDNA configurations and topologies.
+Utility for reading oxDNA configuration and topology files.
 
 readers.py includes the class: LorenzoReader
 """

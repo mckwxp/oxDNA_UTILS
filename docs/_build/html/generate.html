@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to oxDNA UTILS documentation! &mdash; oxDNA_UTILS  documentation</title>
+  <title>generate &mdash; oxDNA_UTILS  documentation</title>
   
 
   
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="origami_utils" href="origami_utils.html" /> 
+    <link rel="prev" title="readers" href="readers.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +49,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> oxDNA_UTILS
+            <a href="index.html" class="icon icon-home"> oxDNA_UTILS
           
 
           
@@ -79,11 +79,11 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">generate</a></li>
 </ul>
 
             
@@ -98,7 +98,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">oxDNA_UTILS</a>
+          <a href="index.html">oxDNA_UTILS</a>
         
       </nav>
 
@@ -127,15 +127,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to oxDNA UTILS documentation!</li>
+      <li>generate</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/generate.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -148,36 +148,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-oxdna-utils-documentation">
-<h1>Welcome to oxDNA UTILS documentation!<a class="headerlink" href="#welcome-to-oxdna-utils-documentation" title="Permalink to this headline">¶</a></h1>
-<table border="1" class="longtable docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
+  <div class="section" id="module-generate">
+<span id="generate"></span><h1>generate<a class="headerlink" href="#module-generate" title="Permalink to this headline">¶</a></h1>
+<p>Utility for generating oxDNA configuration and topology files.</p>
+<dl class="function">
+<dt id="generate.read_strands">
+<code class="descclassname">generate.</code><code class="descname">read_strands</code><span class="sig-paren">(</span><em>filename='caca.sqs'</em>, <em>box_side=50</em><span class="sig-paren">)</span><a class="headerlink" href="#generate.read_strands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates oxDNA configuration and topology files.
+Reads a text file with the following format:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Each line contains the sequence for a single strand (A,C,T,G). The nucleotides can be specified by (case insensitive) letter (A, C, G, T), random (X), strong (S) and weak (W).</li>
+<li>Options: DOUBLE, CIRCULAR, DOUBLE CIRCULAR</li>
+</ul>
+</div></blockquote>
+<p class="rubric">Example</p>
+<ul>
+<li><p class="first">Two ssDNA (single stranded DNA):</p>
+<blockquote>
+<div><p>ATATATA</p>
+<p>GCGCGCG</p>
+</div></blockquote>
+</li>
+<li><p class="first">Two strands, one double stranded, the other single stranded:</p>
+<blockquote>
+<div><p>DOUBLE AGGGCT</p>
+<p>CCTGTA</p>
+</div></blockquote>
+</li>
+<li><p class="first">One dsDNA that frays only on one side:</p>
+<blockquote>
+<div><p>DOUBLE SSXXXXXXWW</p>
+</div></blockquote>
+</li>
+<li><p class="first">One dsDNA that frays very little but has TATA in the middle:</p>
+<blockquote>
+<div><p>DOUBLE SSXXXXTATAXXXXSS</p>
+</div></blockquote>
+</li>
+<li><p class="first">Two strands, one double stranded circular, the other single stranded circular:</p>
+<blockquote>
+<div><p>DOUBLE CIRCULAR AGAGGTAGGAGGATTTGCTTGAGCTTCGAGAGCTTCGAGATTCGATCAGGGCT
+CIRCULAR CCTGTAAGGAGATCGGAGAGATTCGAGAGGATCTGAGAGCTTAGCT</p>
+</div></blockquote>
+</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="origami_utils.html#module-origami_utils" title="origami_utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">origami_utils</span></code></a></td>
-<td>Utility functions for DNA origamis designed in cadnano and simulated in oxDNA.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="base.html#module-base" title="base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base</span></code></a></td>
-<td>Utility functions for oxDNA systems, strands and nucleotides.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="readers.html#module-readers" title="readers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readers</span></code></a></td>
-<td>Utility for reading oxDNA configuration and topology files.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="generate.html#module-generate" title="generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code></a></td>
-<td>Utility for generating oxDNA configuration and topology files.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> – path to text file with a format described above</li>
+<li><strong>box_side</strong> – length of box side</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
+</dd></dl>
+
 </div>
 
 
@@ -188,8 +217,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="origami_utils.html" class="btn btn-neutral float-right" title="origami_utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+        <a href="readers.html" class="btn btn-neutral float-left" title="readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -12,6 +12,7 @@ Welcome to oxDNA UTILS documentation!
    origami_utils
    base
    readers
+   generate
 
 Indices and tables
 ==================

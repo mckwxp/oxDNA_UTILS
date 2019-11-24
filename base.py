@@ -1502,6 +1502,14 @@ class System(object):
         f.close()
 
     def print_lorenzo_output(self, conf_name, top_name, visibility=None):
+        """
+        Outputs oxDNA configuration and topology files for the system.
+
+        Args:
+            conf_name: configuration file name
+            top_name: topology file name
+            visibility: path to visibility file (default is None - everything is visible) 
+        """
         self._prepare(visibility)
         #print self._time, self._box[0], self._box[1], self._box[2], self.E_tot, self.E_pot, self.E_kin
         conf = "t = %lu\nb = %f %f %f\nE = %lf %lf %lf\n" % (int(self._time), self._box[0], self._box[1], self._box[2], self.E_tot, self.E_pot, self.E_kin)

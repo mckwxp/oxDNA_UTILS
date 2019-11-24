@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
 </ul>
 
             
@@ -150,7 +151,7 @@
             
   <div class="section" id="module-base">
 <span id="base"></span><h1>base<a class="headerlink" href="#module-base" title="Permalink to this headline">¶</a></h1>
-<p>Utility functions for oxDNA.</p>
+<p>Utility functions for oxDNA systems, strands and nucleotides.</p>
 <p>base.py includes the classes: System, Strand, Nucleotide</p>
 <dl class="class">
 <dt id="base.Nucleotide">
@@ -643,6 +644,25 @@ Note that the current strand is not changed.</p>
 <dt id="base.System.map_nucleotides_to_strands">
 <code class="descname">map_nucleotides_to_strands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#base.System.map_nucleotides_to_strands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fills the nucl_id -&gt; strand_id array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="base.System.print_lorenzo_output">
+<code class="descname">print_lorenzo_output</code><span class="sig-paren">(</span><em>conf_name</em>, <em>top_name</em>, <em>visibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#base.System.print_lorenzo_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outputs oxDNA configuration and topology files for the system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>conf_name</strong> – configuration file name</li>
+<li><strong>top_name</strong> – topology file name</li>
+<li><strong>visibility</strong> – path to visibility file (default is None - everything is visible)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
