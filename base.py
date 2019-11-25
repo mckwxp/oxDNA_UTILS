@@ -1672,7 +1672,7 @@ class System(object):
 
     def map_nucleotides_to_strands(self):
         """
-        Fills the nucl_id -> strand_id array.
+        Fills the nucl_id -> strand_id array self._nucleotide_to_strand
         """
         index = 0
         for i in range(len(self._strands)):
