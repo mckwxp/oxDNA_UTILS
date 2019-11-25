@@ -10,8 +10,13 @@ Welcome to oxDNA UTILS documentation!
    :caption: Contents:
    :hidden:
        
+   Tutorial
    generate
    output_bonds
+
+Tutorial
+========
+:doc:`Tutorial`
 
 Scripts
 ========
@@ -34,7 +39,7 @@ Modules
 Index
 ==================
 
-* :ref:`genindex`
+:ref:`genindex`
 
 .. * :ref:`modindex`
 .. * :ref:`search`

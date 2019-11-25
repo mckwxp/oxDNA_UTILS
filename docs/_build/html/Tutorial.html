@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; oxDNA_UTILS  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="generate" href="generate.html" />
+    <link rel="prev" title="Welcome to oxDNA UTILS documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> oxDNA_UTILS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">oxDNA_UTILS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>To use the scripts, simply follow the instructions given in their respective documentation pages.</p>
+<p>To use the modules, here is an example code:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">origami_utils</span> <span class="k">as</span> <span class="nn">oru</span>
+<span class="kn">import</span> <span class="nn">readers</span>
+
+<span class="c1"># Read the configuration file &#39;prova.conf&#39; and topology file &#39;prova.top&#39;</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">readers</span><span class="o">.</span><span class="n">LorenzoReader</span><span class="p">(</span><span class="s1">&#39;prova.conf&#39;</span><span class="p">,</span> <span class="s1">&#39;prova.top&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get a base.System object from the reader</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">get_system</span><span class="p">()</span>
+
+<span class="c1"># Initialise an Origami object from the System</span>
+<span class="c1"># The &#39;virt2nuc&#39; file can be generated from cadnano_interface.py with a cadnano json file</span>
+<span class="n">o</span> <span class="o">=</span> <span class="n">oru</span><span class="o">.</span><span class="n">Origami</span><span class="p">(</span><span class="n">system</span> <span class="o">=</span> <span class="n">s</span><span class="p">,</span> <span class="n">cad2cuda_file</span> <span class="o">=</span> <span class="s1">&#39;virt2nuc&#39;</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;All code below are optional&quot;&quot;&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">If you need to know which nucleotides are interacting with which...</span>
+<span class="sd">Note: you don&#39;t have to run this unless you want to use class methods which require this list.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Get a list of interactions between nucleotides</span>
+<span class="c1"># &#39;input&#39; is a normal simulation input file, but it&#39;s only for the DNAnalysis program and it won&#39;t run a simulation</span>
+<span class="n">o</span><span class="o">.</span><span class="n">get_h_bond_list</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">If you want to get the oxDNA nucleotide index from the virtual helix and virtual base in cadnano...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">vh</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># virtual helix index (just an example)</span>
+<span class="n">vb</span> <span class="o">=</span> <span class="mi">2</span>       <span class="c1"># virtual base index (just an example)</span>
+<span class="n">scaf_id</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">get_nucleotides</span><span class="p">(</span><span class="n">vh</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;scaf&quot;</span><span class="p">)</span>   <span class="c1"># get the scaffold nucleotide id</span>
+<span class="n">stap_id</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">get_nucleotides</span><span class="p">(</span><span class="n">vh</span><span class="p">,</span> <span class="n">vb</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;stap&quot;</span><span class="p">)</span>   <span class="c1"># get the staple nucleotide id</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="generate.html" class="btn btn-neutral float-right" title="generate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to oxDNA UTILS documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Marco Wong
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
