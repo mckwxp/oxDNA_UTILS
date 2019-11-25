@@ -1071,7 +1071,7 @@ class Origami(object):
         
         Args:
             vhelix_extent: 2-element array including the beginning and end of the virtual helix indices that you want to use
-            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. 
+            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.
         """
         # z: average vector along helices; y: average vec between vertical helices; x: y cross z
         
@@ -1146,7 +1146,7 @@ class Origami(object):
         These are believed to be two vectors defining a plane of an origami.
 
         Args:
-            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. 
+            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.
         """
         # first find average bbm-bbm vector along helices
         av_long = np.zeros(3, dtype = "float64")
@@ -1297,7 +1297,7 @@ class Origami(object):
         Returns the width, height units of the origami if it had been laid out flat.
 
         Args:
-            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. 
+            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.
         """
         flat_width = 0
         flat_height = 0
@@ -2200,7 +2200,7 @@ class Origami(object):
 
     def get_nearest_native_bonded(self, vhi, vb, increment, bound):
         """
-        Returns the nearest natively bonded base-pair.
+        Returns the nearest natively bonded base-pair. Run get_h_bond_list first.
 
         Args:
             vhi: virtual helix index in vhelix_indices
@@ -2229,6 +2229,7 @@ class Origami(object):
     def get_av_helix_axis(self, vhelix_extent = False, discard_unbonded = True):
         """
         Returns the average helix axis. Optionally discard unbonded (but designed) 'base-pairs', and ignore the regions outside the 'vhelix_extent'.
+        Run get_h_bond_list first.
         
         Args:
             vhelix_extent: 2-element array including the beginning and end of the virtual helix indices that you want to use
@@ -2259,9 +2260,7 @@ class Origami(object):
     
     def get_3d_twist(self, f_edge_vh, vhelix_extent = False, discard_unbonded = True):
         """
-        Returns the 3d global twist (top-bottom and left-right).
-
-        Run get_h_bond_list first.
+        Returns the 3d global twist (top-bottom and left-right). Run get_h_bond_list first.
 
         Args:
             f_edge_vh: path to vh_edge file (see the function parse_vh_edge)
@@ -2488,7 +2487,7 @@ class Origami(object):
     def has_full_hbond(self, vh, vb):
         """
         Returns true if all cadnano base-pairs at this virtual base have their correct base-pairs in the configuration. 
-        Assumes self.interaction_list is already filled.
+        Assumes self.interaction_list is already filled. Run get_h_bond_list first.
 
         Args:
             vh: virtual helix index in cadnano
@@ -2588,7 +2587,7 @@ class Origami(object):
             vh: virtual helix number in cadnano
             mode: "midpoint", which fits a spline through the midpoint between the two strands; or "both strands", which fits two splines through each strand.
             vhelix_extent: 2-element array including the beginning and end of the virtual helix indices that you want to use
-            discard_unbonded: boolean. If true, discard broken base pairs in the calculation.
+            discard_unbonded: boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.
             force_circular: boolean. If true, force a closed curve; the ends of the midpoint curve (which is open) will be joined together by a straight line.
         """
         import scipy.interpolate
