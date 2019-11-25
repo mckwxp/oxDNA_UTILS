@@ -33,8 +33,9 @@ def read_strands(filename='caca.sqs', box_side=50):
     """
     Generates oxDNA configuration and topology files.
     Reads a text file with the following format:
-        - Each line contains the sequence for a single strand (A,C,T,G). The nucleotides can be specified by (case insensitive) letter (A, C, G, T), random (X), strong (S) and weak (W).
-        - Options: DOUBLE, CIRCULAR, DOUBLE CIRCULAR
+
+    - Each line contains the sequence for a single strand (A,C,T,G). The nucleotides can be specified by (case insensitive) letter (A, C, G, T), random (X), strong (S) and weak (W).
+    - Options: DOUBLE, CIRCULAR, DOUBLE CIRCULAR
 
     Example:
         - Two ssDNA (single stranded DNA):
