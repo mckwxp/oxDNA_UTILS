@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>readers &mdash; oxDNA_UTILS  documentation</title>
+  <title>ligation &mdash; oxDNA_UTILS  documentation</title>
   
 
   
@@ -35,7 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="origami_utils" href="origami_utils.html" /> 
+    <link rel="next" title="output_bonds" href="output_bonds.html" />
+    <link rel="prev" title="generate" href="generate.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,16 +81,16 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ligation.html">ligation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ligation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
 </ul>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
 </ul>
 
             
@@ -135,13 +136,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>readers</li>
+      <li>ligation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/readers.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ligation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -154,48 +155,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-readers">
-<span id="readers"></span><h1>readers<a class="headerlink" href="#module-readers" title="Permalink to this headline">¶</a></h1>
-<p>Reads oxDNA configuration and topology files.</p>
-<p>readers.py includes the class: LorenzoReader</p>
-<dl class="class">
-<dt id="readers.LorenzoReader">
-<em class="property">class </em><code class="descclassname">readers.</code><code class="descname">LorenzoReader</code><span class="sig-paren">(</span><em>configuration</em>, <em>topology</em>, <em>check_overlap=False</em><span class="sig-paren">)</span><a class="headerlink" href="#readers.LorenzoReader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reader for oxDNA configurations and topologies.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>configuration</strong> – oxDNA configuration/trajectory file</li>
-<li><strong>topology</strong> – oxDNA topology file</li>
-<li><strong>check_overlap</strong> – boolean. If true, check for nucleotide overlaps in the configuration.</li>
+  <div class="section" id="ligation">
+<h1>ligation<a class="headerlink" href="#ligation" title="Permalink to this headline">¶</a></h1>
+<p>Ligates two strands in an origami and prints out the new configuration and topology file.</p>
+<p>Usage:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">ligation</span><span class="o">.</span><span class="n">py</span> <span class="n">conf_file</span> <span class="n">top_file</span> <span class="n">virt2nuc</span> <span class="n">ligate_file</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>conf_file: configuration file</li>
+<li>top_file: topology file</li>
+<li>virt2nuc: virt2nuc file (can be generated from cadnano_interface.py with a cadnano json file)</li>
+<li>ligate_file: file containing which nucleotide to ligate (details described below)</li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="readers.LorenzoReader.get_system">
-<code class="descname">get_system</code><span class="sig-paren">(</span><em>only_strand_ends=False</em>, <em>N_skip=0</em><span class="sig-paren">)</span><a class="headerlink" href="#readers.LorenzoReader.get_system" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a base.System object by reading one configuration from the given configuration/trajectory file.
-After reaching the end of the configuration file, returns False.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>only_strand_ends</strong> – boolean. If true, a strand will contain only the first and the last nucleotide.</li>
-<li><strong>N_skip</strong> – number of configurations to skip in the trajectory file</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
+</dd>
+<dt>Notes:</dt>
+<dd><p class="first">This script works for multiple ligations in a single structure, but none of the ligations should be performed on the same strand, otherwise the script does not give correct results.</p>
+<p>If you want to connect the 5’ end nucleotide of strand 1 to the 3’ end nucleotide of strand 2, you should put the former nucleotide before the latter nucleotide in the ligate_file. Otherwise, the script will throw a warning.</p>
+<p>An example ligate_file is shown below:</p>
+<p>1 16 stap 0 39 scaf</p>
+<p>1 31 scaf 1 31 stap</p>
+<p class="last">This ligates the staple nucleotide at (vh, vb) = (1, 16) to the scaffold nucleotide at (vh, vb) = (0, 39), as well as the scaffold nucleotide at (vh, vb) = (1, 31) to the staple nucleotide at (1, 31).</p>
+</dd>
+</dl>
 </div>
 
 
@@ -206,8 +190,10 @@ After reaching the end of the configuration file, returns False.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="output_bonds.html" class="btn btn-neutral float-right" title="output_bonds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="origami_utils.html" class="btn btn-neutral float-left" title="origami_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="generate.html" class="btn btn-neutral float-left" title="generate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

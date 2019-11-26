@@ -12,6 +12,7 @@ Welcome to oxDNA UTILS documentation!
        
    Tutorial
    generate
+   ligation
    output_bonds
 
 Tutorial
@@ -23,6 +24,8 @@ Scripts
 
 +-------------------+---------------------------------------------------+
 |:doc:`generate`    | Generates oxDNA configuration and topology files. |
++-------------------+---------------------------------------------------+
+|:doc:`ligation`    | Ligates two strands in an origami.                |
 +-------------------+---------------------------------------------------+
 |:doc:`output_bonds`| Prints out all interactions in the system.        |
 +-------------------+---------------------------------------------------+

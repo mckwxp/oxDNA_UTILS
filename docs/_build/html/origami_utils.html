@@ -84,6 +84,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ligation.html">ligation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
 </ul>
 <ul class="current">
@@ -262,8 +263,7 @@ y’: z’ cross x’</p>
 <dl class="method">
 <dt id="origami_utils.Origami.get_3d_twist">
 <code class="descname">get_3d_twist</code><span class="sig-paren">(</span><em>f_edge_vh</em>, <em>vhelix_extent=False</em>, <em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_3d_twist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the 3d global twist (top-bottom and left-right).</p>
-<p>Run get_h_bond_list first.</p>
+<dd><p>Returns the 3d global twist (top-bottom and left-right). Run get_h_bond_list first.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -292,7 +292,7 @@ NB: the author of this documentation believes that it is actually used. Perhaps 
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>vhelix_extent</strong> – 2-element array including the beginning and end of the virtual helix indices that you want to use</li>
-<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</li>
+<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.</li>
 </ul>
 </td>
 </tr>
@@ -342,7 +342,8 @@ or more generally, a vector pointing along a virtual helix.</p>
 <dl class="method">
 <dt id="origami_utils.Origami.get_av_helix_axis">
 <code class="descname">get_av_helix_axis</code><span class="sig-paren">(</span><em>vhelix_extent=False</em>, <em>discard_unbonded=True</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_av_helix_axis" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the average helix axis. Optionally discard unbonded (but designed) ‘base-pairs’, and ignore the regions outside the ‘vhelix_extent’.</p>
+<dd><p>Returns the average helix axis. Optionally discard unbonded (but designed) ‘base-pairs’, and ignore the regions outside the ‘vhelix_extent’.
+Run get_h_bond_list first.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -494,7 +495,7 @@ The author of this documentation believes that it returns a list of nucleotides 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.</td>
 </tr>
 </tbody>
 </table>
@@ -632,7 +633,7 @@ Here a nick must be between adjacent strands (e.g. if a nucleotide is missing th
 <dl class="method">
 <dt id="origami_utils.Origami.get_nearest_native_bonded">
 <code class="descname">get_nearest_native_bonded</code><span class="sig-paren">(</span><em>vhi</em>, <em>vb</em>, <em>increment</em>, <em>bound</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.get_nearest_native_bonded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the nearest natively bonded base-pair.</p>
+<dd><p>Returns the nearest natively bonded base-pair. Run get_h_bond_list first.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -686,7 +687,7 @@ These are believed to be two vectors defining a plane of an origami.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.</td>
 </tr>
 </tbody>
 </table>
@@ -762,7 +763,7 @@ These are believed to be two vectors defining a plane of an origami.</p>
 <li><strong>vh</strong> – virtual helix number in cadnano</li>
 <li><strong>mode</strong> – “midpoint”, which fits a spline through the midpoint between the two strands; or “both strands”, which fits two splines through each strand.</li>
 <li><strong>vhelix_extent</strong> – 2-element array including the beginning and end of the virtual helix indices that you want to use</li>
-<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation.</li>
+<li><strong>discard_unbonded</strong> – boolean. If true, discard broken base pairs in the calculation. Run get_h_bond_list first.</li>
 <li><strong>force_circular</strong> – boolean. If true, force a closed curve; the ends of the midpoint curve (which is open) will be joined together by a straight line.</li>
 </ul>
 </td>
@@ -826,7 +827,7 @@ reasonable definition of the weave pattern.</p>
 <dt id="origami_utils.Origami.has_full_hbond">
 <code class="descname">has_full_hbond</code><span class="sig-paren">(</span><em>vh</em>, <em>vb</em><span class="sig-paren">)</span><a class="headerlink" href="#origami_utils.Origami.has_full_hbond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns true if all cadnano base-pairs at this virtual base have their correct base-pairs in the configuration.
-Assumes self.interaction_list is already filled.</p>
+Assumes self.interaction_list is already filled. Run get_h_bond_list first.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
