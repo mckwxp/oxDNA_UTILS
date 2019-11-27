@@ -1,9 +1,7 @@
 """
 Utility for generating oxDNA configuration and topology files.
 """
-
-#!/usr/bin/env python
-
+exit()
 import sys, os
 try:
     import numpy as np

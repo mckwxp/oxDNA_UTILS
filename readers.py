@@ -3,7 +3,7 @@ Reads oxDNA configuration and topology files.
 
 readers.py includes the class: LorenzoReader
 """
-
+exit()
 import base
 try:
     import numpy as np

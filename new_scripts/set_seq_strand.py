@@ -1,11 +1,17 @@
+import sys
 import origami_utils as oru
 import base, readers
 
-l = readers.LorenzoReader('prova.conf', 'prova.top')
-s = l.get_system()
-o = oru.Origami(system = s, cad2cuda_file = 'virt2nuc')
+if len(sys.argv) != 5:
+	base.Logger.die("Usage is 'python set_seq_strands.py conf top virt2nuc seq_file'")
 
-infile = open("seq_strand","r")
+base.Logger.log("Remember: oxDNA topology runs 3'-5' (opposite to the usual way of 5'-3')!", base.Logger.INFO)
+
+l = readers.LorenzoReader(sys.argv[1],sys.argv[2])
+s = l.get_system()
+o = oru.Origami(system = s, cad2cuda_file = sys.argv[3])
+
+infile = open(sys.argv[4],"r")
 
 s.map_nucleotides_to_strands()
 for line in infile:
@@ -13,4 +19,6 @@ for line in infile:
 	nucid = o.get_nucleotides(vh, vb, type=nuctype)[0]
 	strandid = s._nucleotide_to_strand[nucid]
 	s._strands[strandid].set_sequence(seq)
-s.print_lorenzo_output('new.conf','new.top')
+
+s.print_lorenzo_output('new_'+sys.argv[1],'new_'+sys.argv[2])
+base.Logger.log("Printed output files %s %s" % ('new_'+sys.argv[1],'new_'+sys.argv[2]), base.Logger.INFO)

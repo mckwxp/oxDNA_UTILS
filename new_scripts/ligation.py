@@ -1,11 +1,15 @@
+import sys
 import origami_utils as oru
 import base, readers
 
-l = readers.LorenzoReader('prova.conf', 'prova.top')
-s = l.get_system()
-o = oru.Origami(system = s, cad2cuda_file = 'virt2nuc')
+if len(sys.argv) != 5:
+	base.Logger.die("Usage is 'python ligation.py conf top virt2nuc ligate_file'")
 
-infile = open("ligate","r")
+l = readers.LorenzoReader(sys.argv[1],sys.argv[2])
+s = l.get_system()
+o = oru.Origami(system = s, cad2cuda_file = sys.argv[3])
+
+infile = open(sys.argv[4],"r")
 s.map_nucleotides_to_strands()
 ligate_list = []
 new_strands = []
@@ -17,11 +21,14 @@ for line in infile:
 	strandid2 = s._nucleotide_to_strand[nucid2]
 	ligate_list.append(strandid1)
 	ligate_list.append(strandid2)
-	print(strandid1, strandid2)
+	base.Logger.log("Ligating strand %d and strand %d" % (strandid1, strandid2), base.Logger.INFO)
 	if (nucid1 != s._strands[strandid1]._last) or (nucid2 != s._strands[strandid2]._first):
-		print("WARNING: Wrong ligation detected. Assume you know what you are doing.")
+		base.Logger.die("You should put the 5' nucleotide before the 3' nucleotide in ligate_file.")
 	new_strand = s._strands[strandid1].append(s._strands[strandid2])
 	new_strands.append(new_strand)
+
+if len(set(ligate_list)) != len(ligate_list):
+	base.Logger.die("Multiple ligations on one strand detected. This cannot be handled by the script.")
 
 new_system = base.System(s._box)
 for idx, strand in enumerate(s._strands):
@@ -32,4 +39,4 @@ for new_strand in new_strands:
 	new_system.add_strand(new_strand.copy(), check_overlap=False)
 
 new_system.print_lorenzo_output('ligated.conf','ligated.top')
-
+base.Logger.log("Printed output files ligated.conf and ligated.top", base.Logger.INFO)

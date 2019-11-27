@@ -1,6 +1,9 @@
 import sys
-import readers
 import origami_utils as oru
+import base, readers
+
+if len(sys.argv) != 5:
+	base.Logger.die("Usage is 'python modify_topology.py conf top virt2nuc seq_file'")
 
 l = readers.LorenzoReader(sys.argv[1],sys.argv[2])
 s = l.get_system()
@@ -8,7 +11,7 @@ o = oru.Origami(system = s, cad2cuda_file = sys.argv[3])
 n_nuc = s._N
 modify = [[],[],[],[]]
 basedict = {'A':0, 'T':1, 'C':2, 'G':3}
-infile = open(sys.argv[4])
+infile = open(sys.argv[4],'r')
 
 for line in infile:
 	base_id = basedict[line.split(':')[0]]
@@ -60,4 +63,4 @@ for i in range(n_nuc):
 	else:
 		newtop.write(oldtop[i+1])
 
-newtop.close()
+base.Logger.log("Printed output file %s" % ('new_'+sys.argv[2]), base.Logger.INFO)

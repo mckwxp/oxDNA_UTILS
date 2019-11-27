@@ -3,6 +3,7 @@ Utility functions for oxDNA systems, strands and nucleotides.
 
 base.py includes the classes: System, Strand, Nucleotide
 """
+exit()
 import sys, os
 try:
     import numpy as np
