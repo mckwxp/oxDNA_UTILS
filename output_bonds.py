@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #A utility that prints out the number of hydrogen bonds between different strands in the system 
-exit()
+
 import base
 try:
     import numpy as np
