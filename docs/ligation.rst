@@ -6,6 +6,8 @@
 ligation
 =======================================
 
+You can download the script `here <https://github.com/mckwxp/oxDNA_UTILS/tree/master/new_scripts>`_.
+
 Ligates two strands in an origami and prints out the new configuration and topology file.
 
 Usage:

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>readers &mdash; oxDNA_UTILS  documentation</title>
+  <title>modify_topology &mdash; oxDNA_UTILS  documentation</title>
   
 
   
@@ -35,7 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="origami_utils" href="origami_utils.html" /> 
+    <link rel="next" title="output_bonds" href="output_bonds.html" />
+    <link rel="prev" title="ligation" href="ligation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,19 +81,19 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ligation.html">ligation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modify_topology.html">modify_topology</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modify_topology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
 <li class="toctree-l1"><a class="reference internal" href="set_seq_strand.html">set_seq_strand</a></li>
 <li class="toctree-l1"><a class="reference internal" href="set_seq_vh_vb.html">set_seq_vh_vb</a></li>
 </ul>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="origami_utils.html">origami_utils</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readers.html">readers</a></li>
 </ul>
 
             
@@ -138,13 +139,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>readers</li>
+      <li>modify_topology</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/readers.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/modify_topology.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,48 +158,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-readers">
-<span id="readers"></span><h1>readers<a class="headerlink" href="#module-readers" title="Permalink to this headline">¶</a></h1>
-<p>Reads oxDNA configuration and topology files.</p>
-<p>readers.py includes the class: LorenzoReader</p>
-<dl class="class">
-<dt id="readers.LorenzoReader">
-<em class="property">class </em><code class="descclassname">readers.</code><code class="descname">LorenzoReader</code><span class="sig-paren">(</span><em>configuration</em>, <em>topology</em>, <em>check_overlap=False</em><span class="sig-paren">)</span><a class="headerlink" href="#readers.LorenzoReader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reader for oxDNA configurations and topologies.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>configuration</strong> – oxDNA configuration/trajectory file</li>
-<li><strong>topology</strong> – oxDNA topology file</li>
-<li><strong>check_overlap</strong> – boolean. If true, check for nucleotide overlaps in the configuration.</li>
+  <div class="section" id="modify-topology">
+<h1>modify_topology<a class="headerlink" href="#modify-topology" title="Permalink to this headline">¶</a></h1>
+<p>You can download the script <a class="reference external" href="https://github.com/mckwxp/oxDNA_UTILS/tree/master/new_scripts">here</a>.</p>
+<p>Primarily used for changing sequences to poly-T in an origami and prints out the new topology file.
+Can also be used to change sequences for other parts, but set_seq scripts should be better.</p>
+<p>Usage:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">modify_topology</span><span class="o">.</span><span class="n">py</span> <span class="n">conf_file</span> <span class="n">top_file</span> <span class="n">virt2nuc</span> <span class="n">seq_file</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><ul class="first last simple">
+<li>conf_file: configuration file</li>
+<li>top_file: topology file</li>
+<li>virt2nuc: virt2nuc file (can be generated from cadnano_interface.py with a cadnano json file)</li>
+<li>seq_file: file containing which base to change (details described below)</li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="readers.LorenzoReader.get_system">
-<code class="descname">get_system</code><span class="sig-paren">(</span><em>only_strand_ends=False</em>, <em>N_skip=0</em><span class="sig-paren">)</span><a class="headerlink" href="#readers.LorenzoReader.get_system" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a base.System object by reading one configuration from the given configuration/trajectory file.
-After reaching the end of the configuration file, returns False.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>only_strand_ends</strong> – boolean. If true, a strand will contain only the first and the last nucleotide.</li>
-<li><strong>N_skip</strong> – number of configurations to skip in the trajectory file</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
+</dd>
+<dt>Notes:</dt>
+<dd><p class="first">An example ligate_file is shown below:</p>
+<p>T: 0-25,70-71,stap 0-6,296-297,stap 8-23,392-393,stap 24-25,232-233,stap</p>
+<p class="last">This will change all the nucleotides for the specified (vh, vb, type) to T.</p>
+</dd>
+</dl>
 </div>
 
 
@@ -209,8 +192,10 @@ After reaching the end of the configuration file, returns False.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="output_bonds.html" class="btn btn-neutral float-right" title="output_bonds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="origami_utils.html" class="btn btn-neutral float-left" title="origami_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="ligation.html" class="btn btn-neutral float-left" title="ligation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

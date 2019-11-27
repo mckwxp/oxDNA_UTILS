@@ -17,7 +17,7 @@ Remember to do
 
    . ~/.bashrc
 
-To use the scripts, simply follow the instructions given in their respective documentation pages.
+To use the scripts, simply follow the instructions given in their respective documentation pages. Note that some scripts are new and not included in the oxDNA package. You can download the missing scripts `here <https://github.com/mckwxp/oxDNA_UTILS/tree/master/new_scripts>`_.
 
 To use the modules, here is an example code:
 

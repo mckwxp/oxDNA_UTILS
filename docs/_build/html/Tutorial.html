@@ -85,7 +85,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ligation.html">ligation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modify_topology.html">modify_topology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_seq_strand.html">set_seq_strand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_seq_vh_vb.html">set_seq_vh_vb</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
@@ -157,7 +160,15 @@
             
   <div class="section" id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>To use the scripts, simply follow the instructions given in their respective documentation pages.</p>
+<p>Before you use any scripts or modules, please put this line in your .bashrc file, and put in the path to your oxDNA UTILS:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;$PYTHONPATH:/path/to/your/oxDNA/UTILS/&quot;</span>
+</pre></div>
+</div>
+<p>Remember to do</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+<p>To use the scripts, simply follow the instructions given in their respective documentation pages. Note that some scripts are new and not included in the oxDNA package. You can download the missing scripts <a class="reference external" href="https://github.com/mckwxp/oxDNA_UTILS/tree/master/new_scripts">here</a>.</p>
 <p>To use the modules, here is an example code:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">origami_utils</span> <span class="k">as</span> <span class="nn">oru</span>
 <span class="kn">import</span> <span class="nn">readers</span>

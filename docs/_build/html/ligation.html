@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="output_bonds" href="output_bonds.html" />
+    <link rel="next" title="modify_topology" href="modify_topology.html" />
     <link rel="prev" title="generate" href="generate.html" /> 
 </head>
 
@@ -85,7 +85,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate.html">generate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ligation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modify_topology.html">modify_topology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_bonds.html">output_bonds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_seq_strand.html">set_seq_strand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set_seq_vh_vb.html">set_seq_vh_vb</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
@@ -157,6 +160,7 @@
             
   <div class="section" id="ligation">
 <h1>ligation<a class="headerlink" href="#ligation" title="Permalink to this headline">¶</a></h1>
+<p>You can download the script <a class="reference external" href="https://github.com/mckwxp/oxDNA_UTILS/tree/master/new_scripts">here</a>.</p>
 <p>Ligates two strands in an origami and prints out the new configuration and topology file.</p>
 <p>Usage:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">ligation</span><span class="o">.</span><span class="n">py</span> <span class="n">conf_file</span> <span class="n">top_file</span> <span class="n">virt2nuc</span> <span class="n">ligate_file</span>
@@ -173,7 +177,7 @@
 </dd>
 <dt>Notes:</dt>
 <dd><p class="first">This script works for multiple ligations in a single structure, but none of the ligations should be performed on the same strand, otherwise the script does not give correct results.</p>
-<p>If you want to connect the 5’ end nucleotide of strand 1 to the 3’ end nucleotide of strand 2, you should put the former nucleotide before the latter nucleotide in the ligate_file. Otherwise, the script will throw a warning.</p>
+<p>If you want to connect the 5’ end nucleotide of strand 1 to the 3’ end nucleotide of strand 2, you should put the former nucleotide before the latter in the ligate_file.</p>
 <p>An example ligate_file is shown below:</p>
 <p>1 16 stap 0 39 scaf</p>
 <p>1 31 scaf 1 31 stap</p>
@@ -190,7 +194,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="output_bonds.html" class="btn btn-neutral float-right" title="output_bonds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="modify_topology.html" class="btn btn-neutral float-right" title="modify_topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="generate.html" class="btn btn-neutral float-left" title="generate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
