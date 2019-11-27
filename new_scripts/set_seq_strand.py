@@ -5,7 +5,7 @@ import base, readers
 if len(sys.argv) != 5:
 	base.Logger.die("Usage is 'python set_seq_strands.py conf top virt2nuc seq_file'")
 
-base.Logger.log("Remember: oxDNA topology runs 3'-5' (opposite to the usual way of 5'-3')!", base.Logger.INFO)
+base.Logger.log("Remember: oxDNA sequences run 3'-5' (opposite to the usual way of 5'-3')!", base.Logger.INFO)
 
 l = readers.LorenzoReader(sys.argv[1],sys.argv[2])
 s = l.get_system()

@@ -13,7 +13,10 @@ Welcome to oxDNA UTILS documentation!
    Tutorial
    generate
    ligation
+   modify_topology
    output_bonds
+   set_seq_strand
+   set_seq_vh_vb
 
 Tutorial
 ========
@@ -22,13 +25,19 @@ Tutorial
 Scripts
 ========
 
-+-------------------+---------------------------------------------------+
-|:doc:`generate`    | Generates oxDNA configuration and topology files. |
-+-------------------+---------------------------------------------------+
-|:doc:`ligation`    | Ligates two strands in an origami.                |
-+-------------------+---------------------------------------------------+
-|:doc:`output_bonds`| Prints out all interactions in the system.        |
-+-------------------+---------------------------------------------------+
++-----------------------+---------------------------------------------------+
+|:doc:`generate`        | Generates oxDNA configuration and topology files. |
++-----------------------+---------------------------------------------------+
+|:doc:`ligation`        | Ligates two strands in an origami.                |
++-----------------------+---------------------------------------------------+
+|:doc:`modify_topology` | Changes sequences to poly-T in an origami.        |
++-----------------------+---------------------------------------------------+
+|:doc:`output_bonds`    | Prints out all interactions in the system.        |
++-----------------------+---------------------------------------------------+
+|:doc:`set_seq_strand`  | Changes sequences of whole strands in an origami. |
++-----------------------+---------------------------------------------------+
+|:doc:`set_seq_vh_vb`   | Changes sequences in an origami, e.g. sticky ends.|
++-----------------------+---------------------------------------------------+
 
 Modules
 =======

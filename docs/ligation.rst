@@ -23,7 +23,7 @@ Args:
 Notes:
     This script works for multiple ligations in a single structure, but none of the ligations should be performed on the same strand, otherwise the script does not give correct results.
 
-    If you want to connect the 5' end nucleotide of strand 1 to the 3' end nucleotide of strand 2, you should put the former nucleotide before the latter nucleotide in the ligate_file. Otherwise, the script will throw a warning.
+    If you want to connect the 5' end nucleotide of strand 1 to the 3' end nucleotide of strand 2, you should put the former nucleotide before the latter in the ligate_file.
 
     An example ligate_file is shown below:
 
