@@ -8,10 +8,13 @@ Tutorial
 Before you use any scripts or modules, please put this line in your .bashrc file, and put in the path to your oxDNA UTILS:
 
 .. code:: python
+
    export PYTHONPATH="$PYTHONPATH:/path/to/your/oxDNA/UTILS/"
 
 Remember to do 
+
 .. code:: python
+
    . ~/.bashrc
 
 To use the scripts, simply follow the instructions given in their respective documentation pages.
