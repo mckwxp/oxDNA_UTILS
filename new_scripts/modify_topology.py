@@ -10,7 +10,7 @@ s = l.get_system()
 o = oru.Origami(system = s, cad2cuda_file = sys.argv[3])
 n_nuc = s._N
 modify = [[],[],[],[]]
-basedict = {'A':0, 'T':1, 'C':2, 'G':3}
+basedict = {'A':0, 'G':1, 'C':2, 'T':3}
 infile = open(sys.argv[4],'r')
 
 for line in infile:
@@ -47,7 +47,7 @@ for i in range(n_nuc):
 
 	elif i in modify[1]:
 		words = oldtop[i+1].split()
-		words[1] = 'T'
+		words[1] = 'G'
 		newtop.write(' '.join(words)+'\n')
 
 	elif i in modify[2]:
@@ -57,7 +57,7 @@ for i in range(n_nuc):
 
 	elif i in modify[3]:
 		words = oldtop[i+1].split()
-		words[1] = 'G'
+		words[1] = 'T'
 		newtop.write(' '.join(words)+'\n')
 
 	else:
