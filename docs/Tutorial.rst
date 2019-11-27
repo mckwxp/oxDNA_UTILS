@@ -6,6 +6,7 @@
 Tutorial
 =======================================
 Before you use any scripts or modules, please put this line in your .bashrc file, and put in the path to your oxDNA UTILS:
+
 .. code:: python
    export PYTHONPATH="$PYTHONPATH:/path/to/your/oxDNA/UTILS/"
 
