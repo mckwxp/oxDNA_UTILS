@@ -33,5 +33,9 @@ Notes:
 
     1 31 scaf 1 31 stap
 
-    This ligates the staple nucleotide at (vh, vb) = (1, 16) to the scaffold nucleotide at (vh, vb) = (0, 39), as well as the scaffold nucleotide at (vh, vb) = (1, 31) to the staple nucleotide at (1, 31). 
+    This ligates the staple nucleotide at (vh, vb) = (1, 16) to the scaffold nucleotide at (vh, vb) = (0, 39), as well as the scaffold nucleotide at (vh, vb) = (1, 31) to the staple nucleotide at (1, 31). vh and vb stands for virtual base index and virtual helix index in cadnano.
+    (Apparently this does not make any sense. It only serves as an example.)
+
+.. image:: figure1.png
+   :width: 400
 

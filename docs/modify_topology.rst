@@ -28,4 +28,4 @@ Notes:
 
     T: 0-25,70-71,stap 0-6,296-297,stap 8-23,392-393,stap 24-25,232-233,stap
 
-    This will change all the nucleotides for the specified (vh, vb, type) to T.
+    This will change all the nucleotides for the specified (vh, vb, type) to T. vh and vb stands for virtual base index and virtual helix index in cadnano, and type is either stap (staple) or scaf (scaffold).
