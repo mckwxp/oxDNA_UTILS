@@ -17,6 +17,8 @@ Remember to do
 
    . ~/.bashrc
 
+Throughout the documentation, you will often see something called vh and vb. These are the virtual helix index and virtual base index in cadnano. You can get these numbers by hovering your mouse over a nucleotide in cadnano, and the two indices will show up at the lower left corner.
+
 To use the scripts, simply follow the instructions given in their respective documentation pages. Note that some scripts are new and not included in the oxDNA package. You can download the missing scripts `here <https://github.com/mckwxp/oxDNA_UTILS/tree/master/new_scripts>`_.
 
 To use the modules, here is an example code:

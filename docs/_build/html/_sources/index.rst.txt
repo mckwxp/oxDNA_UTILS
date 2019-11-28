@@ -45,6 +45,7 @@ Modules
    :toctree:
 
    base
+   generators
    origami_utils
    readers
 

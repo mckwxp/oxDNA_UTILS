@@ -29,4 +29,4 @@ Notes:
 
     0 16 stap AAAAAAAAAAAAAAAA
 
-    This will change the sequence for the strand containing the specified nucleotide at (vh, vb, type) to AAAAAAAAAAAAAAAA.
+    This will change the sequence for the strand containing the specified nucleotide at (vh, vb, type) to AAAAAAAAAAAAAAAA. vh and vb stands for virtual base index and virtual helix index in cadnano, and type is either stap (staple) or scaf (scaffold).

@@ -27,4 +27,4 @@ Notes:
 
     0 16-23 stap ATCGATCG
 
-    This will change the sequence for the specified (vh, vb, type) to ATCGATCG.
+    This will change the sequence for the specified (vh, vb, type) to ATCGATCG. vh and vb stands for virtual base index and virtual helix index in cadnano, and type is either stap (staple) or scaf (scaffold).

@@ -165,6 +165,7 @@ def main():
     except:
         base.Logger.die("Could not open file '%s' for reading. Aborting" % filename)
         sys.exit(2)
+
     read_strands(filename, box_side)
 
 if __name__ == "__main__":
