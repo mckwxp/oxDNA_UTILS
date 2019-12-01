@@ -56,8 +56,8 @@ protected:
 public:
 	number _r0;
 	number _rate;
-	int _com_indexes[252];
-	int _ref_indexes[252];
+	int _com_indexes[1000];
+	int _ref_indexes[1000];
 	int _n_com;
 	int _n_ref;
 

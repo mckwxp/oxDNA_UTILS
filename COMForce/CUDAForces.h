@@ -188,8 +188,8 @@ struct COM_force {
 	number stiff;
 	number r0;
 	number rate;
-	int com_indexes[252];
-	int ref_indexes[252];
+	int com_indexes[1000];
+	int ref_indexes[1000];
 	int n_com;
 	int n_ref;
 };
