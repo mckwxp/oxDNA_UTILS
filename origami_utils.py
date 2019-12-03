@@ -115,8 +115,6 @@ def get_base_spline(strand, reverse = False):
 def get_sayar_twist(s1, s2, smin, smax, npoints = 1000, circular = False, integral_type = "simple"):
     """
     Returns the twist for a given pair of spline fits, one through the bases of each strand. 
-    Only works with circular strands now, although the default for circular is False. 
-    Probably a bug of the original script, but this will be fixed in the future.
 
     From Sayar et al. Phys. Rev. E, 81, 041916 (2010)
 
@@ -238,8 +236,6 @@ def get_sayar_twist(s1, s2, smin, smax, npoints = 1000, circular = False, integr
 def get_sayar_writhe(splines1, smin, smax, splines2 = False, npoints = 1000, debug = False, circular = False, integral_type = "simple"):
     """
     Returns the writhe for a 3D spline fit through a set of duplex midpoints.
-    Only works with circular strands now, although the default for circular is False. 
-    Probably a bug of the original script, but this will be fixed in the future.
 
     From Sayar et al. Phys. Rev. E, 81, 041916 (2010).
 
