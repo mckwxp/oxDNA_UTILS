@@ -323,6 +323,25 @@ __global__ void set_external_forces(number4 *poss, GPU_quat<number> *orientation
 				F.z += force.z;
 				break;
 			}
+			case CUDA_COM_TRAP: {
+				number4 com = make_number4<number,number4>(0.,0.,0.,0.);
+				for(int index = 0; index < extF.comtrap.n_com; index++){
+					int index2 = extF.comtrap.com_indexes[index];					
+					com += poss[index2];
+				}
+				com.x /= extF.comtrap.n_com;
+				com.y /= extF.comtrap.n_com;
+				com.z /= extF.comtrap.n_com;
+
+				number tx = extF.comtrap.pos0.x + extF.comtrap.rate * step * extF.comtrap.dir.x;
+				number ty = extF.comtrap.pos0.y + extF.comtrap.rate * step * extF.comtrap.dir.y;
+				number tz = extF.comtrap.pos0.z + extF.comtrap.rate * step * extF.comtrap.dir.z;
+
+				F.x += - extF.comtrap.stiff * (com.x - tx) / extF.comtrap.n_com;
+				F.y += - extF.comtrap.stiff * (com.y - ty) / extF.comtrap.n_com;
+				F.z += - extF.comtrap.stiff * (com.z - tz) / extF.comtrap.n_com;
+				break;
+			}
 			default: {
 				break;
 			}

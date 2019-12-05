@@ -14,6 +14,7 @@
 #include "../Thermostats/CUDAThermostatFactory.h"
 
 #include "../../Forces/COMForce.h"
+#include "../../Forces/COMTrap.h"
 #include "../../Forces/ConstantRateForce.h"
 #include "../../Forces/ConstantRateTorque.h"
 #include "../../Forces/ConstantTrap.h"
@@ -511,6 +512,7 @@ void MD_CUDABackend<number, number4>::init(){
 		GenericCentralForce<number> generic_central;
 		LJCone<number> LJ_cone;
 		COMForce<number> comforce;
+		COMTrap<number> comtrap;
 
 		for(int i = 0; i < this->_N; i++) {
 			BaseParticle<number> *p = this->_particles[i];
@@ -650,10 +652,22 @@ void MD_CUDABackend<number, number4>::init(){
 						force->comforce.ref_indexes[i] = p_force->_ref_indexes[i];
 					}
 				}
+				else if(typeid (*(p->ext_forces[j])) == typeid(comtrap) ) {
+					COMTrap<number> *p_force = (COMTrap<number> *) p->ext_forces[j];
+					force->type = CUDA_COM_TRAP;
+					force->comtrap.stiff = p_force->_stiff;
+					force->comtrap.rate = p_force->_rate;
+					force->comtrap.n_com = p_force->_n_com;
+					force->comtrap.pos0 = make_float3 (p_force->_pos0.x, p_force->_pos0.y, p_force->_pos0.z);
+					force->comtrap.dir = make_float3 (p_force->_direction.x, p_force->_direction.y, p_force->_direction.z);
+					for (int i = 0; i < p_force->_n_com; i++){
+						force->comtrap.com_indexes[i] = p_force->_com_indexes[i];
+					}
+				}
 				else {
 					throw oxDNAException ("Only ConstantRate, MutualTrap, MovingTrap, LowdimMovingTrap, RepulsionPlane, "
-							"RepulsionPlaneMoving, RepulsiveSphere, LJWall, ConstantRateTorque, GenericCentralForce and "
-							"COMForce forces are supported on CUDA at the moment.\n");
+							"RepulsionPlaneMoving, RepulsiveSphere, LJWall, ConstantRateTorque, GenericCentralForce, "
+							"COMForce and COMTrap forces are supported on CUDA at the moment.\n");
 				}
 			}
 		}

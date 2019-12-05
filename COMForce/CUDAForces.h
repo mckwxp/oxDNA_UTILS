@@ -24,6 +24,7 @@
 #define CUDA_LJ_CONE 10
 #define CUDA_REPULSIVE_SPHERE_SMOOTH 11
 #define CUDA_COM_FORCE 12
+#define CUDA_COM_TRAP 13
 
 /**
  * @brief CUDA version of a ConstantRateForce.
@@ -188,12 +189,25 @@ struct COM_force {
 	number stiff;
 	number r0;
 	number rate;
-	int com_indexes[1000];
-	int ref_indexes[1000];
+	int com_indexes[252];
+	int ref_indexes[252];
 	int n_com;
 	int n_ref;
 };
 
+/**
+ * @brief CUDA version of a COMForce.
+ */
+template<typename number>
+struct COM_trap {
+	int type;
+	number stiff;
+	number rate;
+	float3 pos0;
+	float3 dir;
+	int com_indexes[252];
+	int n_com;
+};
 
 /**
  * @brief Used internally by CUDA classes to provide an inheritance-like mechanism for external forces.
@@ -214,6 +228,7 @@ union CUDA_trap {
 	generic_constant_force<number> genericconstantforce;
 	LJ_cone<number> ljcone;
 	COM_force<number> comforce;
+	COM_trap<number> comtrap;
 };
 
 #endif /* CUDAFORCES_H_ */
