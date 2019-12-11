@@ -25,6 +25,7 @@
 #define CUDA_REPULSIVE_SPHERE_SMOOTH 11
 #define CUDA_COM_FORCE 12
 #define CUDA_COM_TRAP 13
+#define CUDA_COM_TWIST 14
 
 /**
  * @brief CUDA version of a ConstantRateForce.
@@ -196,7 +197,7 @@ struct COM_force {
 };
 
 /**
- * @brief CUDA version of a COMForce.
+ * @brief CUDA version of a COMTrap.
  */
 template<typename number>
 struct COM_trap {
@@ -205,6 +206,20 @@ struct COM_trap {
 	number rate;
 	float3 pos0;
 	float3 dir;
+	int com_indexes[252];
+	int n_com;
+};
+
+/**
+ * @brief CUDA version of a COMTwist.
+ */
+template<typename number>
+struct COM_twist {
+	int type;
+	number stiff;
+	number rate;
+	number F0;
+	float3 center, pos0, axis, mask;
 	int com_indexes[252];
 	int n_com;
 };
@@ -229,6 +244,7 @@ union CUDA_trap {
 	LJ_cone<number> ljcone;
 	COM_force<number> comforce;
 	COM_trap<number> comtrap;
+	COM_twist<number> comtwist;
 };
 
 #endif /* CUDAFORCES_H_ */

@@ -15,6 +15,7 @@
 
 #include "../../Forces/COMForce.h"
 #include "../../Forces/COMTrap.h"
+#include "../../Forces/COMTwist.h"
 #include "../../Forces/ConstantRateForce.h"
 #include "../../Forces/ConstantRateTorque.h"
 #include "../../Forces/ConstantTrap.h"
@@ -513,6 +514,7 @@ void MD_CUDABackend<number, number4>::init(){
 		LJCone<number> LJ_cone;
 		COMForce<number> comforce;
 		COMTrap<number> comtrap;
+		COMTwist<number> comtwist;
 
 		for(int i = 0; i < this->_N; i++) {
 			BaseParticle<number> *p = this->_particles[i];
@@ -664,10 +666,25 @@ void MD_CUDABackend<number, number4>::init(){
 						force->comtrap.com_indexes[i] = p_force->_com_indexes[i];
 					}
 				}
+				else if(typeid (*(p->ext_forces[j])) == typeid(comtwist) ) {
+					COMTwist<number> *p_force = (COMTwist<number> *) p->ext_forces[j];
+					force->type = CUDA_COM_TWIST;
+					force->comtwist.stiff = p_force->_stiff;
+					force->comtwist.rate = p_force->_rate;
+					force->comtwist.F0 = p_force->_F0;
+					force->comtwist.n_com = p_force->_n_com;
+					force->comtwist.center = make_float3 (p_force->_center.x, p_force->_center.y, p_force->_center.z);
+					force->comtwist.pos0 = make_float3 (p_force->_pos0.x, p_force->_pos0.y, p_force->_pos0.z);
+					force->comtwist.axis = make_float3 (p_force->_axis.x, p_force->_axis.y, p_force->_axis.z);
+					force->comtwist.mask = make_float3 (p_force->_mask.x, p_force->_mask.y, p_force->_mask.z);
+					for (int i = 0; i < p_force->_n_com; i++){
+						force->comtwist.com_indexes[i] = p_force->_com_indexes[i];
+					}
+				}
 				else {
 					throw oxDNAException ("Only ConstantRate, MutualTrap, MovingTrap, LowdimMovingTrap, RepulsionPlane, "
 							"RepulsionPlaneMoving, RepulsiveSphere, LJWall, ConstantRateTorque, GenericCentralForce, "
-							"COMForce and COMTrap forces are supported on CUDA at the moment.\n");
+							"COMForce, COMTrap and COMTwist forces are supported on CUDA at the moment.\n");
 				}
 			}
 		}

@@ -10,6 +10,7 @@
 // forces to include
 #include "COMForce.h"
 #include "COMTrap.h"
+#include "COMTwist.h"
 #include "ConstantRateForce.h"
 #include "SawtoothForce.h"
 #include "ConstantRateTorque.h"
@@ -73,6 +74,7 @@ void ForceFactory<number>::add_force(input_file &inp, BaseParticle<number> **par
 	else if (type_str.compare("sphere_smooth") == 0) extF = new RepulsiveSphereSmooth<number>();
 	else if (type_str.compare("com") == 0) extF = new COMForce<number>();
 	else if (type_str.compare("comtrap") == 0) extF = new COMTrap<number>();
+	else if (type_str.compare("comtwist") == 0) extF = new COMTwist<number>();
 	else if (type_str.compare("LJ_wall") == 0) extF = new LJWall<number>();
 	else if (type_str.compare("hard_wall") == 0) extF = new HardWall<number>();
 	else if (type_str.compare("alignment_field") == 0) extF = new AlignmentField<number>();

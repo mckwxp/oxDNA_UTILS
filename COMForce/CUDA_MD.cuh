@@ -342,6 +342,41 @@ __global__ void set_external_forces(number4 *poss, GPU_quat<number> *orientation
 				F.z += - extF.comtrap.stiff * (com.z - tz) / extF.comtrap.n_com;
 				break;
 			}
+			case CUDA_COM_TWIST: {
+				number4 com = make_number4<number,number4>(0.,0.,0.,0.);
+				for(int index = 0; index < extF.comtwist.n_com; index++){
+					int index2 = extF.comtwist.com_indexes[index];					
+					com += poss[index2];
+				}
+				com.x /= extF.comtwist.n_com;
+				com.y /= extF.comtwist.n_com;
+				com.z /= extF.comtwist.n_com;
+
+				number t = (extF.comtwist.F0 + extF.comtwist.rate * (number)step);
+				number sintheta = sinf(t);
+				number costheta = cosf(t);
+				number olcos = (number)1.f - costheta;
+
+				number xyo = extF.comtwist.axis.x * extF.comtwist.axis.y * olcos;
+				number xzo = extF.comtwist.axis.x * extF.comtwist.axis.z * olcos;
+				number yzo = extF.comtwist.axis.y * extF.comtwist.axis.z * olcos;
+				number xsin = extF.comtwist.axis.x * sintheta;
+				number ysin = extF.comtwist.axis.y * sintheta;
+				number zsin = extF.comtwist.axis.z * sintheta;
+
+				float3 to_rotate = extF.comtwist.pos0 - extF.comtwist.center;
+				float3 postrap = make_float3(
+						(extF.comtwist.axis.x * extF.comtwist.axis.x * olcos + costheta)*to_rotate.x + (xyo - zsin)*to_rotate.y + (xzo + ysin)*to_rotate.z,
+						(xyo + zsin)*to_rotate.x + (extF.comtwist.axis.y * extF.comtwist.axis.y * olcos + costheta)*to_rotate.y + (yzo - xsin)*to_rotate.z,
+						(xzo - ysin)*to_rotate.x + (yzo + xsin)*to_rotate.y + (extF.comtwist.axis.z * extF.comtwist.axis.z * olcos + costheta)*to_rotate.z
+				);
+				postrap += extF.comtwist.center;
+
+				F.x += - extF.comtwist.stiff * (com.x - postrap.x) * extF.comtwist.mask.x / extF.comtwist.n_com;
+				F.y += - extF.comtwist.stiff * (com.y - postrap.y) * extF.comtwist.mask.y / extF.comtwist.n_com;
+				F.z += - extF.comtwist.stiff * (com.z - postrap.z) * extF.comtwist.mask.z / extF.comtwist.n_com;
+				break;
+			}
 			default: {
 				break;
 			}

@@ -509,7 +509,7 @@ class Nucleotide(Printable):
 
 class Strand(Printable):
     """
-    Strands are composed of Nucleotides.
+    Strands are composed of Nucleotides. Access nucleotide objects of Strand strand1 by strand1._nucleotides[nucleotide_index].
     Strands can be contained in a System.
 
     Attributes:
@@ -944,7 +944,7 @@ def parse_visibility(path):
 
 class System(object):
     """
-    Object representing an oxDNA system. Contains strands.
+    Object representing an oxDNA system. Contains strands. Access strand objects of System system1 by system1._strands[strand_index].
 
     Args:
         box: Box size of the system, e.g. box = [50, 50, 50]
