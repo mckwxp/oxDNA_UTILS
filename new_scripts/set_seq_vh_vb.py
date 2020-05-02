@@ -14,7 +14,7 @@ newtop = open('new_'+sys.argv[2],'w')
 
 infile = open(sys.argv[4],"r")
 
-s.map_nucleotides_to_strands()
+#s.map_nucleotides_to_strands()
 for line in infile:
 	vh, vb_list, nuctype, seq = int(line.split()[0]), line.split()[1], line.split()[2], line.split()[3]
 	vb_range = range(int(vb_list.split('-')[0]), int(vb_list.split('-')[1])+1)
@@ -22,9 +22,9 @@ for line in infile:
 		base.Logger.die("Sequence length is different from the given vb range. Double check your input.")
 	for idx, vb in enumerate(vb_range):
 		nucid = o.get_nucleotides(vh, vb, type=nuctype)[0]
-		words = oldtop[idx+1].split()
+		words = oldtop[nucid+1].split()
 		words[1] = seq[idx]
-		oldtop[idx+1] = ' '.join(words)+'\n'
+		oldtop[nucid+1] = ' '.join(words)+'\n'
 
 for line in oldtop:
 	newtop.write(line)
