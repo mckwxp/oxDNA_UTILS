@@ -14,6 +14,7 @@ Welcome to oxDNA UTILS documentation!
    generate
    ligation
    modify_topology
+   mutual_traps
    output_bonds
    set_seq_strand
    set_seq_vh_vb
@@ -31,6 +32,8 @@ Scripts
 |:doc:`ligation`        | Ligates two strands in an origami.                |
 +-----------------------+---------------------------------------------------+
 |:doc:`modify_topology` | Changes sequences to poly-T in an origami.        |
++-----------------------+---------------------------------------------------+
+|:doc:`mutual_traps`    | Makes the mutual trap external force file.        |
 +-----------------------+---------------------------------------------------+
 |:doc:`output_bonds`    | Prints out all interactions in the system.        |
 +-----------------------+---------------------------------------------------+
