@@ -16,6 +16,7 @@ Welcome to oxDNA UTILS documentation!
    modify_topology
    mutual_traps
    output_bonds
+   pulling_force
    set_seq_strand
    set_seq_vh_vb
 
@@ -33,9 +34,11 @@ Scripts
 +-----------------------+---------------------------------------------------+
 |:doc:`modify_topology` | Changes sequences to poly-T in an origami.        |
 +-----------------------+---------------------------------------------------+
-|:doc:`mutual_traps`    | Makes the mutual trap external force file.        |
+|:doc:`mutual_traps`    | Makes a mutual trap external force file.          |
 +-----------------------+---------------------------------------------------+
 |:doc:`output_bonds`    | Prints out all interactions in the system.        |
++-----------------------+---------------------------------------------------+
+|:doc:`pulling_force`   | Makes a pulling external force file.              |
 +-----------------------+---------------------------------------------------+
 |:doc:`set_seq_strand`  | Changes sequences of whole strands in an origami. |
 +-----------------------+---------------------------------------------------+

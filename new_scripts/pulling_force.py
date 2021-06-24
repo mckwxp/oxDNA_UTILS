@@ -60,9 +60,11 @@ def write_output(vh1list, vb1list, vh2list, vb2list):
 	
 	outfile.write('}\n\n')
 
+# [origami_id, cadnano helix_id]; use 0 for origami_id if you only have 1 origami (monomer)
 vh1list = [[0,i] for i in range(5,12) + range(20,27)]
-vb1list = range(49,62)
 vh2list = [[0,i] for i in range(5,12) + range(20,27)]
+# cadnano base_id
+vb1list = range(49,62)
 vb2list = range(259,272)
 
 write_output(vh1list, vb1list, vh2list, vb2list)
