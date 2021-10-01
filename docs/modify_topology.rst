@@ -24,7 +24,7 @@ Args:
     - seq_file: file containing which base to change (details described below)
 
 Notes:
-    An example ligate_file is shown below:
+    An example seq_file is shown below:
 
     T: 0-25,70-71,stap 0-6,296-297,stap 8-23,392-393,stap 24-25,232-233,stap
 
